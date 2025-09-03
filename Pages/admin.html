@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Document</title>
+</head>
+<body class="bg-gray-100 flex">
+    <nav class="fixed left-0 top-0 bottom-0 w-64 bg-orange-50 shadow-md flex flex-col z-10">
+        <div class="logo p-5 border-b border-gray-200">
+            <h1 class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
+        </div>
+
+        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
+            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil" class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
+            <h3 class="font-semibold text-orange-300">Karthi Madesh</h3>
+            <h4 class="text-sm text-gray-500">User</h4>
+        </div>
+        
+        <ul class="p-3 flex-1">
+            <li class="mb-2">
+                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-list mr-3"></i>
+                    <span>Mes congés</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="add_leave.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i class="fas fa-plus mr-3"></i>
+                    <span>Demande de congé</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i class="fas fa-cog mr-3"></i>
+                    <span>Administration</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="index.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    <span>Tableau de bord</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="p-5 border-t border-gray-200">
+            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg transition-colors">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </nav>
+<main class="flex-1 p-6 overflow-auto">
+    <div class="statistic  grid grid-cols-1 blg-s">
+    <div class="card">
+        <i></i>
+        <p></p>
+    </div>
+    <div class="card">
+        <i></i>
+        <p></p>
+    </div>
+    <div class="card">
+        <i></i>
+        <p></p>
+    </div>
+    <div class="card">
+        <i></i>
+        <p></p>
+    </div>
+</div>
+<section class="dashboard">
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+</section></main>
+</body>
+</html>

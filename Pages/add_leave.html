@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="w-64 bg-orange-50 h-screen shadow-md flex flex-col">
+        <div class="logo p-5 border-b border-gray-200">
+            <h1 class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
+        </div>
+
+        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
+            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil" class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
+            <h3 class="font-semibold text-orange-300">Karthi Modesh</h3>
+            <h4 class="text-sm text-gray-500">user</h4>
+        </div>
+        
+        <ul class="p-3 flex-1">
+            <li class="mb-2">
+                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg">
+                    <i class="fas fa-list mr-3"></i>
+                    <span>Mes congés</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="add_leave.html" class="flex items-center p-3 text-white bg-orange-300  rounded-lg">
+                    <i class="fas fa-plus mr-3"></i>
+                    <span>Demande de congé</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-cog mr-3"></i>
+                    <span>Administration</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="index.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-chart-bar mr-3"></i>
+                    <span>Tableau de bord</span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="p-5 border-t border-gray-200">
+            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </nav>
+    <main class="flex ">
+        
+<div class="formulaire">
+    <h2>Demande de congé</h2>
+    <p>Remplissez le formulaire ci-dessous pour soumettre votre demande de congé.</p>
+    <form action="">
+        <label for="start">Start Date</label>
+        <input type="date" name="startDate" id="start">
+
+        <label for="end">End Date</label>
+        <input type="date" name="endDate" id="end">
+
+        <label for="type">Type de congé</label>
+       <select name="type" id="type">
+        <option value="">type1</option>
+        <option value="">type2</option>
+        <option value="">type3</option>
+        <option value="">type</option>
+       </select>
+
+        <label for="justif">Justification</label>
+        <textarea name="justif" id="justif" textarea>
+    </form>
+
+    <div class="info">
+        <h3>Information importante</h3>
+        <p>Votre demande sera transmise à votre manager pour validation. Vous
+recevrez une notification par email une fois la décision prise.</p>
+    </div>
+</div>
+<div class="lastes">
+    <div class="details">
+        <h3>title</h3>
+        <span>start date</span>
+        <span>end date</span>
+        <p>Durée</p>
+    </div>
+    
+</div>
+    </main>
+
+    <footer>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </footer>
+</body>
+</html>
