@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Document</title>
 </head>
-<body class="bg-gray-100 flex">
-    <nav class="fixed left-0 top-0 bottom-0 w-64 bg-orange-50 shadow-md flex flex-col z-10">
+<body class="bg-gray-100 overflow-x-hidden">
+    <nav class="fixed w-64 bg-orange-50 shadow-md flex flex-col ">
         <div class="logo p-5 border-b border-gray-200">
             <h1 class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
         </div>
 
         <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
             <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil" class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
-            <h3 class="font-semibold text-orange-300">Karthi Madesh</h3>
+            <h3 class="font-semibold text-orange-300">Karthi MOdesh</h3>
             <h4 class="text-sm text-gray-500">User</h4>
         </div>
         
@@ -33,13 +33,13 @@
                 </a>
             </li>
             <li class="mb-2">
-                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                <a href="admin.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg transition-colors">
                     <i class="fas fa-cog mr-3"></i>
                     <span>Administration</span>
                 </a>
             </li>
             <li class="mb-2">
-                <a href="index.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg">
+                <a href="index.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100  rounded-lg">
                     <i class="fas fa-chart-bar mr-3"></i>
                     <span>Tableau de bord</span>
                 </a>
@@ -53,85 +53,103 @@
             </a>
         </div>
     </nav>
-<main class="flex-1 p-6 overflow-auto">
-    <div class="statistic  grid grid-cols-1 blg-s">
-    <div class="card">
-        <i></i>
-        <p></p>
+<main class="flex-1 ml-64 p-6 ">
+     <div class="search w-ful bg-white h-20">
+        <i class="fa-solid fa-arrow-left text-gray-500 p-2 text-2xl "></i>
+        <input type="text"><i class="fa-solid fa-search"></i>
+        <i class="fa-solid fa-bell"></i>
+
     </div>
-    <div class="card">
-        <i></i>
-        <p></p>
+        <h2 class="text-2xl font-bold text-black mb-6">Mes congés</h2>
+        <div class="statistic grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="card bg-orange-200 p-4 rounded-lg shadow-sm">
+                <i class="fas fa-calendar-check text-orange-500 text-xl mb-2"></i>
+                <p class="text-sm text-gray-500">Congés restants</p>
+                <p class="text-2xl font-bold">28 jours</p>
+            </div>
+            <div class="card bg-green-100 p-4 rounded-lg shadow-sm ">
+                <i class="fas fa-check-circle text-green-800 text-xl mb-2"></i>
+                <p class="text-sm text-green-800">Approuvés</p>
+                <p class="text-2xl font-bold">5 jours</p>
+            </div>
+            <div class="card bg-yellow-100 p-4 rounded-lg shadow-sm ">
+                <i class="fas fa-clock text-yellow-800 text-xl mb-2"></i>
+                <p class="text-sm text-yellow-800">En attente</p>
+                <p class="text-2xl font-bold">23 jours</p>
+            </div>
+            <div class="card bg-red-100 p-4 rounded-lg shadow-sm ">
+                <i class="fas fa-times-circle text-red-800 text-xl mb-2"></i>
+                <p class="text-sm text-red-800">Refusés</p>
+                <p class="text-2xl font-bold">0 jour</p>
+            </div>
+        </div>
+        
+<section class="dashboard  bg-white rounded-lg shadow-sm p-4">
+    <div>
+        <h2>Demande Congés</h2>
     </div>
-    <div class="card">
-        <i></i>
-        <p></p>
+    <div class="container grid grid-cols-3 md:grid-cols-3 gap-6 mb-6">
+    <div class="cardLeav ">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
     </div>
-    <div class="card">
-        <i></i>
-        <p></p>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
     </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+
+    <div class="cardLeave">
+        <h3>NAME</h3>
+        <h3>ROLE</h3>
+        <P>STATUS</P>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <h6>type  <span>type</span></h6>
+        <button type="submit">Approver</button>
+        <button type="submit">Refuser</button>
+    </div>
+    
 </div>
-<section class="dashboard">
-    <div class="cardLeave">
-        <h3>NAME</h3>
-        <h3>ROLE</h3>
-        <P>STATUS</P>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <button type="submit">Approver</button>
-        <button type="submit">Refuser</button>
-    </div>
-
-    <div class="cardLeave">
-        <h3>NAME</h3>
-        <h3>ROLE</h3>
-        <P>STATUS</P>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <button type="submit">Approver</button>
-        <button type="submit">Refuser</button>
-    </div>
-
-    <div class="cardLeave">
-        <h3>NAME</h3>
-        <h3>ROLE</h3>
-        <P>STATUS</P>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <button type="submit">Approver</button>
-        <button type="submit">Refuser</button>
-    </div>
-
-    <div class="cardLeave">
-        <h3>NAME</h3>
-        <h3>ROLE</h3>
-        <P>STATUS</P>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <button type="submit">Approver</button>
-        <button type="submit">Refuser</button>
-    </div>
-
-    <div class="cardLeave">
-        <h3>NAME</h3>
-        <h3>ROLE</h3>
-        <P>STATUS</P>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <h6>type  <span>type</span></h6>
-        <button type="submit">Approver</button>
-        <button type="submit">Refuser</button>
-    </div>
 </section></main>
 </body>
 </html>
