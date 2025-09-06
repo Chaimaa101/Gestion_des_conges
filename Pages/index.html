@@ -1,85 +1,84 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="../Images/icon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../Images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Style/style.css">
     <title>RH Dashboard</title>
 </head>
+
 <body class="bg-gray-100 overflow-x-hidden">
 
-    <nav class=" fixed w-64 bg-orange-50 h-screen shadow-md flex flex-col">
-        <div class="logo p-5 border-b border-gray-200">
-            <h1 class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
-        </div>
-
-        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
-            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil" class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
-            <h3 class="font-semibold text-orange-300">Karthi Modesh</h3>
-            <h4 class="text-sm text-gray-500">User</h4>
-        </div>
-        
-        <ul class="p-3 flex-1">
-            <li class="mb-2">
-                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg hover:bg-gray-100">
-                    <i class="fas fa-list mr-3"></i>
-                    <span>Mes congés</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="add_leave.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-plus mr-3"></i>
-                    <span>Demande de congé</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-cog mr-3"></i>
-                    <span>Administration</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="index.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg">
-                    <i class="fas fa-chart-bar mr-3"></i>
-                    <span>Tableau de bord</span>
-                </a>
-            </li>
-        </ul>
-        
-        <div class="p-5 border-t border-gray-200">
-            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg">
-                <i class="fas fa-sign-out-alt mr-3"></i>
-                <span>Déconnexion</span>
-            </a>
-        </div>
-    </nav>
-
-
-    <main class="flex-1 ml-64 p-6 overflow-auto">
+    <main class="mainContent flex-1 ml-64 p-6 overflow-auto">
         <div class="mb-6">
             <h2 class="text-2xl font-bold text-black">Tableau de bord</h2>
-            <p class="text-gray-600 pb-4 border-b border-gray-200">Bienvenue, gérez vos congés et suivez vos demandes.</p>
+            <p class="text-gray-600 pb-4 border-b border-gray-200">Bienvenue, gérez vos congés et suivez vos demandes.
+            </p>
         </div>
 
-        <div class="bg-white p-4 rounded-lg shadow mb-6">
-            <h3 class="text-xl font-semibold text-red-500 mb-2">
-                <i class="fas fa-exclamation-circle mr-2"></i>Notification importante
-            </h3>
-            <div class="flex items-start">
-                <input type="checkbox" class="mt-1 mr-3">
-                <div>
-                    <p class="font-medium">Fermeture exceptionnelle</p>
-                    <p class="text-gray-600">Les bureaux seront fermés le 8 mars 2025 pour maintenance. Planifiez vos congés en conséquence.</p>
+        <div class="w-full ">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-bell text-yellow-500 mr-2"></i> Notifications importantes
+            </h2>
+            
+            <input type="radio" name="carousel" id="slide-1" class="hidden" checked>
+            <input type="radio" name="carousel" id="slide-2" class="hidden">
+            <input type="radio" name="carousel" id="slide-3" class="hidden">
+            
+            <div class="overflow-hidden relative">
+                <div class="flex transition-transform duration-500 ease-in-out w-[300%] translate-x-0"
+                     id="carousel">
+                    <!-- Notification 1 -->
+                    <div class="w-1/3 flex-shrink-0 pr-4">
+                        <div class="flex items-start bg-red-100 p-4 rounded-lg">
+                            <div>
+                                
+                                <h3 class="font-semibold text-red-800">Fermeture exceptionnelle</h3>
+                                <p class="text-red-600 mt-1">Les bureaux seront fermés le 8 mars 2025 pour maintenance. Planifiez vos congés en conséquence.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification 2 -->
+                    <div class="w-1/3 flex-shrink-0 px-2 bg-green-100 p-4 rounded-lg">
+                        <div class="flex items-start">
+                            <div>
+                                <h3 class="font-semibold text-green-800">Nouvelle politique de congés</h3>
+                                <p class="text-green-600 mt-1">À partir du 1er janvier 2025, de nouvelles règles de congés seront en vigueur. Consultez les détails.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification 3 -->
+                    <div class="w-1/3 flex-shrink-0 pl-4 bg-purple-100 p-4 rounded-lg">
+                        <div class="flex items-start">
+                            <div>
+                                <h3 class="font-semibold text-purple-800">Mise à jour du système</h3>
+                                <p class="text-purple-600 mt-1">Le système de gestion des congés sera indisponible le 15 décembre de 20h à 22h pour maintenance.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Navigation du carrousel -->
+            <div class="flex justify-center mt-4 space-x-2">
+                <label for="slide-1" class="cursor-pointer w-3 h-3 rounded-full bg-blue-500 carousel-nav" onclick="showSlide(0)"></label>
+                <label for="slide-2" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(1)"></label>
+                <label for="slide-3" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(2)"></label>
+            </div>
         </div>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Demande en cours</h3>
+
+        <div class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 my-6">
+            <div class="bg-white p-4   w-xs rounded-lg shadow">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Solde de congés</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between">
                         <span class="text-gray-600">Congés payés</span>
@@ -96,20 +95,38 @@
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded-lg shadow">
+            <div class="bg-white p-4   w-xs rounded-lg shadow">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Demandes en cours</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">En attente</span>
+                        <span class="font-semibold">25</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Approuvées</span>
+                        <span class="font-semibold">5</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Refusées</span>
+                        <span class="font-semibold">15</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4   w-xs rounded-lg shadow">
                 <h3 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">Prochains congés</h3>
                 <div class="space-y-3">
                     <div class="flex justify-between">
-                        <span class="text-gray-600">Congés payés</span>
-                        <span class="font-semibold">25 jours</span>
+                        <span class="text-gray-600">Congés d'été</span>
+                        <span class="font-semibold">15-30 juillet 2025</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600">RTT</span>
-                        <span class="font-semibold">5 jours</span>
+                        <span class="text-gray-600">Pont de mai</span>
+                        <span class="font-semibold">1-3 main2025</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="text-gray-600">Congés maladies</span>
-                        <span class="font-semibold">15 jours</span>
+                        <span class="text-gray-600">Pond d'avril</span>
+                        <span class="font-semibold">15-20 Avril 2025</span>
                     </div>
                 </div>
             </div>
@@ -118,24 +135,31 @@
         <div class="bg-white p-4 rounded-lg shadow">
             <h3 class="text-lg font-semibold text-gray-700 mb-4">Actions rapides</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <a href="#" class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                <a href="add_leave.html"
+                    class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
                     <i class="fas fa-plus-circle text-2xl text-orange-500 mb-2"></i>
                     <span class="text-sm text-center">Nouvelle demande</span>
                 </a>
-                <a href="#" class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                <a href="list_leaves.html"
+                    class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
                     <i class="fas fa-calendar-alt text-2xl text-orange-500 mb-2"></i>
                     <span class="text-sm text-center">Mes congés</span>
                 </a>
-                <a href="#" class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                <a href="admin.html"
+                    class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
                     <i class="fas fa-chart-bar text-2xl text-orange-500 mb-2"></i>
                     <span class="text-sm text-center">Statistiques</span>
                 </a>
-                <a href="#" class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
+                <a href="index.html"
+                    class="flex flex-col items-center p-4 bg-orange-50 rounded-lg hover:bg-orange-100 transition">
                     <i class="fas fa-cog text-2xl text-orange-500 mb-2"></i>
                     <span class="text-sm text-center">Paramètres</span>
                 </a>
             </div>
         </div>
     </main>
+<script src="../Script/script.js"></script>
+    
 </body>
+
 </html>

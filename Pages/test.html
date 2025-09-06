@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Sidebar Toggle</title>
+</head>
+<body class="flex bg-gray-100">
+
+  <!-- Sidebar -->
+  <nav id="sidebar" class="sidebar fixed w-64 bg-orange-50 h-screen shadow-md flex flex-col transition-all duration-300">
+        <!-- Bouton toggle -->
+        <div class="p-3 flex justify-end">
+            <button id="toggleBtn" class="text-gray-600 hover:text-gray-900">
+                <i class="fas fa-angle-left"></i>
+            </button>
+        </div>
+
+        <div class="logo p-5 border-b border-gray-200">
+            <h1 id="sidebarTitle" class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
+        </div>
+
+        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
+            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil"
+                class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
+            <h3 id="userName" class="font-semibold text-orange-300">Karthi Modesh</h3>
+            <h4 id="userRole" class="text-sm text-gray-500">User</h4>
+        </div>
+
+        <ul class="p-3 flex-1">
+            <li class="mb-2">
+                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg">
+                    <i class="fas fa-list w-6"></i>
+                    <span class="ml-3 sidebar-text">Mes congés</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="add_leave.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg">
+                    <i class="fas fa-plus w-6"></i>
+                    <span class="ml-3 sidebar-text">Demande de congé</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-cog w-6"></i>
+                    <span class="ml-3 sidebar-text">Administration</span>
+                </a>
+            </li>
+            <li class="mb-2">
+                <a href="index.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <i class="fas fa-chart-bar w-6"></i>
+                    <span class="ml-3 sidebar-text">Tableau de bord</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="p-5 border-t border-gray-200">
+            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg">
+                <i class="fas fa-sign-out-alt w-6"></i>
+                <span class="ml-3 sidebar-text">Déconnexion</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Contenu principal -->
+    <main class="ml-64 p-6 transition-all duration-300" id="mainContent">
+        <h1 class="text-2xl font-bold">Bienvenue 👋</h1>
+        <p class="mt-2 text-gray-600">Ceci est le tableau de bord principal.</p>
+    </main>
+    <div class="w-full max-w-2xl">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-bell text-yellow-500 mr-2"></i> Notifications importantes
+            </h2>
+            
+            <input type="radio" name="carousel" id="slide-1" class="hidden" checked>
+            <input type="radio" name="carousel" id="slide-2" class="hidden">
+            <input type="radio" name="carousel" id="slide-3" class="hidden">
+            
+            <div class="overflow-hidden relative">
+                <div class="flex transition-transform duration-500 ease-in-out w-[300%] translate-x-0"
+                     id="carousel">
+                    <!-- Notification 1 -->
+                    <div class="w-1/3 flex-shrink-0 pr-4">
+                        <div class="flex items-start">
+                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Fermeture exceptionnelle</h3>
+                                <p class="text-gray-600 mt-1">Les bureaux seront fermés le 8 mars 2025 pour maintenance. Planifiez vos congés en conséquence.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification 2 -->
+                    <div class="w-1/3 flex-shrink-0 px-2">
+                        <div class="flex items-start">
+                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Nouvelle politique de congés</h3>
+                                <p class="text-gray-600 mt-1">À partir du 1er janvier 2025, de nouvelles règles de congés seront en vigueur. Consultez les détails.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification 3 -->
+                    <div class="w-1/3 flex-shrink-0 pl-4">
+                        <div class="flex items-start">
+                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Mise à jour du système</h3>
+                                <p class="text-gray-600 mt-1">Le système de gestion des congés sera indisponible le 15 décembre de 20h à 22h pour maintenance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation du carrousel -->
+            <div class="flex justify-center mt-4 space-x-2">
+                <label for="slide-1" class="cursor-pointer w-3 h-3 rounded-full bg-blue-500 carousel-nav" onclick="showSlide(0)"></label>
+                <label for="slide-2" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(1)"></label>
+                <label for="slide-3" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(2)"></label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSlide(index) {
+            const carousel = document.getElementById('carousel');
+            const translateValue = -index * 33.3333;
+            carousel.style.transform = `translateX(${translateValue}%)`;
+            
+            // Mettre à jour la navigation
+            const navDots = document.querySelectorAll('.carousel-nav');
+            navDots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-gray-300');
+                    dot.classList.add('bg-blue-500');
+                } else {
+                    dot.classList.remove('bg-blue-500');
+                    dot.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+            const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("mainContent");
+        const toggleBtn = document.getElementById("toggleBtn");
+        const sidebarTexts = document.querySelectorAll(".sidebar-text");
+        const sidebarTitle = document.getElementById("sidebarTitle");
+        const userName = document.getElementById("userName");
+        const userRole = document.getElementById("userRole");
+
+        let isCollapsed = false;
+
+        toggleBtn.addEventListener("click", () => {
+            isCollapsed = !isCollapsed;
+
+            if (isCollapsed) {
+                sidebar.classList.replace("w-64", "w-20");
+                mainContent.classList.replace("ml-64", "ml-20");
+                sidebarTexts.forEach(el => el.classList.add("hidden"));
+                sidebarTitle.classList.add("hidden");
+                userName.classList.add("hidden");
+                userRole.classList.add("hidden");
+                toggleBtn.innerHTML = `<i class="fas fa-angle-right"></i>`;
+            } else {
+                sidebar.classList.replace("w-20", "w-64");
+                mainContent.classList.replace("ml-20", "ml-64");
+                sidebarTexts.forEach(el => el.classList.remove("hidden"));
+                sidebarTitle.classList.remove("hidden");
+                userName.classList.remove("hidden");
+                userRole.classList.remove("hidden");
+                toggleBtn.innerHTML = `<i class="fas fa-angle-left"></i>`;
+            }
+        });
+
+    </script>
+
+</body>
+</html>

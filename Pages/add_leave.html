@@ -6,275 +6,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="shortcut icon" href="../Images/icon.webp" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="../Images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../Style/style.css">
+    <title>Demande de Congé</title>
 </head>
 
 <body class=" bg-gray-100 overflow-x-hidden">
-    <nav class=" fixed w-64 bg-orange-50 h-screen shadow-md flex flex-col">
-        <div class="logo p-5 border-b border-gray-200">
-            <h1 class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
-        </div>
 
-        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
-            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil"
-                class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
-            <h3 class="font-semibold text-orange-300">Karthi Modesh</h3>
-            <h4 class="text-sm text-gray-500">User</h4>
-        </div>
+    <main id="mainContent" class="mainContent ml-64 min-h-screen flex items-center justify-center py-8 ">
+        <div class="container max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Formulaire de demande -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-6 card">
+                        <h1 class="text-2xl font-bold text-gray-800 mb-2">Nouvelle demande de congé</h1>
+                        <p class="text-gray-600 mb-6">Remplissez le formulaire ci-dessous pour soumettre votre demande
+                            de congé.</p>
 
-        <ul class="p-3 flex-1">
-            <li class="mb-2">
-                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg">
-                    <i class="fas fa-list mr-3"></i>
-                    <span>Mes congés</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="add_leave.html" class="flex items-center p-3 text-white bg-orange-300  rounded-lg">
-                    <i class="fas fa-plus mr-3"></i>
-                    <span>Demande de congé</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-cog mr-3"></i>
-                    <span>Administration</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="index.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-chart-bar mr-3"></i>
-                    <span>Tableau de bord</span>
-                </a>
-            </li>
-        </ul>
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
+                                    <input type="date"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
 
-        <div class="p-5 border-t border-gray-200">
-            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg">
-                <i class="fas fa-sign-out-alt mr-3"></i>
-                <span>Déconnexion</span>
-            </a>
-        </div>
-    </nav>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
+                                    <input type="date"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                </div>
+                            </div>
 
-    <main class="ml-64 min-h-screen flex items-center justify-center py-8 ">
-    <div class="container max-w-6xl mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Formulaire de demande -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-xl shadow-md p-6 mb-6 card">
-                    <h1 class="text-2xl font-bold text-gray-800 mb-2">Nouvelle demande de congé</h1>
-                    <p class="text-gray-600 mb-6">Remplissez le formulaire ci-dessous pour soumettre votre demande de congé.</p>
-                    
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
-                                    <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-
+                                <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
+                                <select
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                    <option>Congés payés</option>
+                                    <option>RTT</option>
+                                    <option>Congés maladie</option>
+                                    <option>Congés sans solde</option>
+                                    <option>Congés maternité/paternité</option>
+                                    <option>Autre</option>
+                                </select>
                             </div>
+
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
-                                    <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <label class="block text-gray-700 mb-2 font-medium">Justification</label>
+                                <textarea rows="4"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                    placeholder="La raison de votre demande"></textarea>
                             </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                <option>Congés payés</option>
-                                <option>RTT</option>
-                                <option>Congés maladie</option>
-                                <option>Congés sans solde</option>
-                                <option>Congés maternité/paternité</option>
-                                <option>Autre</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-2 font-medium">Justification</label>
-                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="La raison de votre demande"></textarea>
-                        </div>
-                        <div class="bg-red-50 border border-red-200 rounded-xl p-5 card">
-                    <h2 class="text-lg font-semibold text-orange-800 mb-2 flex items-center">
-                        <i class="fas fa-info-circle mr-2"></i> Information importante
-                    </h2>
-                    <p class="text-orange-700">
-                        Votre demande sera transmise à votre manager pour validation. Vous recevrez une notification par email une fois la décision prise.
-                    </p>
+                            <div class="bg-red-50 border border-red-200 rounded-xl p-5 card">
+                                <h2 class="text-lg font-semibold text-orange-800 mb-2 flex items-center">
+                                    <i class="fas fa-info-circle mr-2"></i> Information importante
+                                </h2>
+                                <p class="text-orange-700">
+                                    Votre demande sera transmise à votre manager pour validation. Vous recevrez une
+                                    notification par email une fois la décision prise.
+                                </p>
+                            </div>
+                            <div class="flex space-x-4 pt-4">
+                                <button type="submit"
+                                    class="px-6 py-3 bg-orange-400 text-white rounded-lg font-medium hover:bg-orange-700 transition-colors flex-1">
+                                    Soumettre
+                                </button>
+                                <button type="reset"
+                                    class="px-6 py-3 bg-orange-100 text-gray-700 rounded-lg font-medium hover:bg-orange-300 transition-colors flex-1">
+                                    Réinitialiser
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                        <div class="flex space-x-4 pt-4">
-                            <button type="submit" class="px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-700 transition-colors flex-1">
-                                Soumettre
-                            </button>
-                            <button type="reset" class="px-6 py-3 bg-orange-100 text-gray-700 rounded-lg font-medium hover:bg-orange-300 transition-colors flex-1">
-                                Réinitialiser
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-xl shadow-md p-6 pb-8 card">
-                    <h2 class="text-xl font-bold text-gray-800 mb-6">Mes dernières demandes</h2>
-                    
-                    <div class="space-y-5">
-                        <!-- Demande 1 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right"> <i class="fas fa-check text-green-600 text-xs"></i> Approuvé</span></h3>
-                                                        
-                            
-                            <div class="grid grid-cols-2 gap-2 text-sm">
-                                <div class="text-gray-500">Début:</div>
-                                <div class="text-gray-800 font-medium">12.03.2025</div>
-                                <div class="text-gray-500">Fin:</div>
-                                <div class="text-gray-800 font-medium">20.04.2025</div>
-                                <div class="text-gray-500">Durée:</div>
-                                <div class="text-gray-800 font-medium">12 jours</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Demande 2 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i class="fas fa-xmark"></i> Refusé</span>
-                            <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde </h3>
-                            <div class="grid grid-cols-2 gap-2 text-sm">
-                                <div class="text-gray-500">Début:</div>
-                                <div class="text-gray-800 font-medium">02.04.2025</div>
-                                <div class="text-gray-500">Fin:</div>
-                                <div class="text-gray-800 font-medium">10.04.2025</div>
-                                <div class="text-gray-500">Durée:</div>
-                                <div class="text-gray-800 font-medium">5 jours</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Demande 3 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde 
-                                                          <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right "> <i class="fas fa-clock"></i> attente</span>
 
-                            </h3>
-                            <div class=" items-center  float-right">
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-md p-6 pb-8 card">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Mes dernières demandes</h2>
+
+                        <div class="space-y-5">
+                            <!-- Demande 1 -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde <span
+                                        class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right">
+                                        <i class="fas fa-check text-green-600 text-xs"></i> Approuvé</span></h3>
+
+
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="text-gray-500">Début:</div>
+                                    <div class="text-gray-800 font-medium">12.03.2025</div>
+                                    <div class="text-gray-500">Fin:</div>
+                                    <div class="text-gray-800 font-medium">20.04.2025</div>
+                                    <div class="text-gray-500">Durée:</div>
+                                    <div class="text-gray-800 font-medium">12 jours</div>
+                                </div>
                             </div>
-                            <div class="grid grid-cols-2 gap-2 text-sm">
-                                <div class="text-gray-500">Début:</div>
-                                <div class="text-gray-800 font-medium">27.05.2025</div>
-                                <div class="text-gray-500">Fin:</div>
-                                <div class="text-gray-800 font-medium">01.06.2025</div>
-                                <div class="text-gray-500">Durée:</div>
-                                <div class="text-gray-800 font-medium">30 jours</div>
+
+                            <!-- Demande 2 -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i
+                                        class="fas fa-xmark"></i> Refusé</span>
+                                <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde </h3>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="text-gray-500">Début:</div>
+                                    <div class="text-gray-800 font-medium">02.04.2025</div>
+                                    <div class="text-gray-500">Fin:</div>
+                                    <div class="text-gray-800 font-medium">10.04.2025</div>
+                                    <div class="text-gray-500">Durée:</div>
+                                    <div class="text-gray-800 font-medium">5 jours</div>
+                                </div>
+                            </div>
+
+                            <!-- Demande 3 -->
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde
+                                    <span
+                                        class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right ">
+                                        <i class="fas fa-clock"></i> attente</span>
+
+                                </h3>
+                                <div class=" items-center  float-right">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="text-gray-500">Début:</div>
+                                    <div class="text-gray-800 font-medium">27.05.2025</div>
+                                    <div class="text-gray-500">Fin:</div>
+                                    <div class="text-gray-800 font-medium">01.06.2025</div>
+                                    <div class="text-gray-500">Durée:</div>
+                                    <div class="text-gray-800 font-medium">30 jours</div>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde
+                                    <span
+                                        class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right ">
+                                        <i class="fas fa-clock"></i> attente</span>
+
+                                </h3>
+                                <div class=" items-center  float-right">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="text-gray-500">Début:</div>
+                                    <div class="text-gray-800 font-medium">27.05.2025</div>
+                                    <div class="text-gray-500">Fin:</div>
+                                    <div class="text-gray-800 font-medium">01.06.2025</div>
+                                    <div class="text-gray-500">Durée:</div>
+                                    <div class="text-gray-800 font-medium">30 jours</div>
+                                </div>
                             </div>
                         </div>
-
-                         <div class="border border-gray-200 rounded-lg p-4">
-                            <h3 class="font-semibold text-gray-800 mb-2">Congés sans solde 
-                                                          <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right "> <i class="fas fa-clock"></i> attente</span>
-
-                            </h3>
-                            <div class=" items-center  float-right">
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 text-sm">
-                                <div class="text-gray-500">Début:</div>
-                                <div class="text-gray-800 font-medium">27.05.2025</div>
-                                <div class="text-gray-500">Fin:</div>
-                                <div class="text-gray-800 font-medium">01.06.2025</div>
-                                <div class="text-gray-500">Durée:</div>
-                                <div class="text-gray-800 font-medium">30 jours</div>
-                            </div>
-                        </div>
+                        <a class="text-gray-500 float-right m-1" href="list_leaves.html">Show more <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-      </main>
-    <footer class="bg-orange-50 text-gray-600 ml-64">
-        <div class="container px-4 py-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Contact RH -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 flex items-center">
-                        <i class="fas fa-headset mr-2 text-orange-400"></i> Contact RH
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope text-orange-400 mr-3 w-5"></i>
-                            <a href="mailto:rh@entreprise.com" class="footer-link">rh@entreprise.com</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone text-orange-400 mr-3 w-5"></i>
-                            <a href="tel:+33123456789" class="footer-link">+33 1 23 45 67 89</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-clock text-orange-400 mr-3 w-5"></i>
-                            <span>Lun-Ven 9h-17h</span>
-                        </li>
-                    </ul>
-                </div>
+    </main>
+   
+<script src="../Script/script.js"></script>
 
-                <!-- Adresse -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 flex items-center">
-                        <i class="fas fa-map-marker-alt mr-2 text-orange-400"></i> Adresse
-                    </h3>
-                    <address class="not-italic">
-                        <p class="flex items-start mb-2">
-                            <i class="fas fa-building text-orange-400 mr-3 mt-1 w-5"></i>
-                            <span>123 Rue de l'Entreprise<br>75001 Paris, France</span>
-                        </p>
-                    </address>
-                </div>
-
-                <!-- Liens utiles -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 flex items-center">
-                        <i class="fas fa-link mr-2 text-orange-400"></i> Liens utiles
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">Politique de congés</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">Guide employé</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">Support technique</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Assistance -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 flex items-center">
-                        <i class="fas fa-hands-helping mr-2 text-orange-400"></i> Assistance
-                    </h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">Centre d'aide</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">FAQ</a>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-chevron-right text-orange-400 text-xs mr-3 w-5"></i>
-                            <a href="#" class="footer-link">Signaler un problème</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-2 pt-2 text-center text-gray-400">
-                <p>© 2025 Entreprise. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
 </body>
 
 </html>
