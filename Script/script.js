@@ -6,9 +6,9 @@ sidebare.innerHTML = `
         </div>
 
         <div  class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
-            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil"
+            <img src="https://placehold.co/80x80/ff8904/FFFFFF?text=KM" alt="Photo profil"
              class="rounded-full w-20 h-20 mb-3">
-            <h3 class="sidebar-text font-semibold text-orange-300">Karthi Modesh</h3>
+            <h3 class="sidebar-text font-semibold text-orange-400">Karthi Modesh</h3>
             <h4 class=" text-sm text-gray-500">User</h4>
         </div>
 
@@ -55,7 +55,7 @@ sidebare.innerHTML = `
             </button>
         </div>
 
-        <div class="flex  bg-white border-2 border-gray-300 p-1 rounded-md shadow-sm w-72 ml-160 md:ml-1">
+        <div class="flex  bg-white border-2 border-gray-300 p-1 rounded-md shadow-sm w-72 ">
             <input type="text" placeholder="Search..." class="w-full text-sm text-gray-700 ">
             <button class=" "md:hidden text-gray-400 hover:text-gray-700">
                 <i class="fas fa-search"></i>

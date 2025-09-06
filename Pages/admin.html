@@ -1,66 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="shortcut icon" href="../Images/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Administration</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" href="../Images/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../Style/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Administration</title>
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
-   
-    <main class="mainContent flex-1 ml-0 md:ml-64 p-4 md:p-6 transition-all duration-300">
+  <main class="mainContent flex-1 ml-64 md:ml-64 p-4 md:p-6 transition-all duration-500 ease-in-out">
+    
+    <!-- Title -->
+    <h2 class="text-xl md:text-2xl font-bold text-black mb-4 md:mb-6 animate-fadeIn">
+      Mes congés
+    </h2>
+    
+    <!-- Stats Section -->
+    <div class="statistic grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
+      <div class="card bg-orange-200 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
+        <i class="fas fa-calendar-check text-orange-500 text-lg md:text-xl mb-1 md:mb-2"></i>
+        <p class="text-xs md:text-sm text-gray-500">Congés restants</p>
+        <p class="text-lg md:text-2xl font-bold">28 jours</p>
+      </div>
+      <div class="card bg-green-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
+        <i class="fas fa-check-circle text-green-800 text-lg md:text-xl mb-1 md:mb-2"></i>
+        <p class="text-xs md:text-sm text-green-800">Approuvés</p>
+        <p class="text-lg md:text-2xl font-bold">5 jours</p>
+      </div>
+      <div class="card bg-yellow-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
+        <i class="fas fa-clock text-yellow-800 text-lg md:text-xl mb-1 md:mb-2"></i>
+        <p class="text-xs md:text-sm text-yellow-800">En attente</p>
+        <p class="text-lg md:text-2xl font-bold">23 jours</p>
+      </div>
+      <div class="card bg-red-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
+        <i class="fas fa-times-circle text-red-800 text-lg md:text-xl mb-1 md:mb-2"></i>
+        <p class="text-xs md:text-sm text-red-800">Refusés</p>
+        <p class="text-lg md:text-2xl font-bold">0 jour</p>
+      </div>
+    </div>
+
+    <!-- Requests Section -->
+    <section class="bg-white p-3 md:p-4 shadow-md rounded animate-fadeIn">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         
-        <h2 class="text-xl md:text-2xl font-bold text-black mb-4 md:mb-6">Mes congés</h2>
+        <h3 class="text-md md:text-lg font-semibold">Demandes de congés</h3>
         
-        <div class="statistic grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6">
-            <div class="card bg-orange-200 p-3 md:p-4 rounded-lg shadow-xl-sm">
-                <i class="fas fa-calendar-check text-orange-500 text-lg md:text-xl mb-1 md:mb-2"></i>
-                <p class="text-xs md:text-sm text-gray-500">Congés restants</p>
-                <p class="text-lg md:text-2xl font-bold">28 jours</p>
-            </div>
-            <div class="card bg-green-100 p-3 md:p-4 rounded-lg shadow-xl-sm">
-                <i class="fas fa-check-circle text-green-800 text-lg md:text-xl mb-1 md:mb-2"></i>
-                <p class="text-xs md:text-sm text-green-800">Approuvés</p>
-                <p class="text-lg md:text-2xl font-bold">5 jours</p>
-            </div>
-            <div class="card bg-yellow-100 p-3 md:p-4 rounded-lg shadow-xl-sm">
-                <i class="fas fa-clock text-yellow-800 text-lg md:text-xl mb-1 md:mb-2"></i>
-                <p class="text-xs md:text-sm text-yellow-800">En attente</p>
-                <p class="text-lg md:text-2xl font-bold">23 jours</p>
-            </div>
-            <div class="card bg-red-100 p-3 md:p-4 rounded-lg shadow-xl-sm">
-                <i class="fas fa-times-circle text-red-800 text-lg md:text-xl mb-1 md:mb-2"></i>
-                <p class="text-xs md:text-sm text-red-800">Refusés</p>
-                <p class="text-lg md:text-2xl font-bold">0 jour</p>
-            </div>
+        <!-- Filters -->
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
+            <option selected disabled>Choisir statut</option>
+            <option value="en-attente">En attente</option>
+            <option value="approuvé">Approuvé</option>
+            <option value="refusé">Refusé</option>
+          </select>
+          
+          <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
+            <option selected disabled>Choisir période</option>
+            <option value="ce-mois">Ce mois</option>
+            <option value="3-mois">3 derniers mois</option>
+            <option value="année">Cette année</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Requests Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mt-4">
+        
+        <!-- Example card -->
+        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
+          <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
+            <i class="fas fa-clock"></i> En attente
+          </span>
+          <p class="font-semibold text-sm md:text-base">Chaimaâ AFKIR</p>
+          <p class="mb-2 text-xs md:text-sm text-gray-600">Data Analyste</p>
+          <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
+          <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
+          <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
+          <div class="flex space-x-2">
+            <button class="bg-orange-400 px-3 py-1 rounded text-white text-xs md:text-sm hover:bg-orange-500 transition disabled:opacity-50" disabled>
+              Approuver
+            </button>
+            <button class="bg-orange-100 px-3 py-1 rounded text-xs md:text-sm hover:bg-orange-200 transition">
+              Refuser
+            </button>
+          </div>
         </div>
 
-        <section class="bg-white p-3 md:p-4 shadow-md rounded">
-            <div class="flex space-x-3">
-            <h3 class="text-md md:text-lg font-semibold mb-3 md:mb-4">Demandes de congés</h3>
-
-  <div class="float-right">
-    <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ">
-    <option selected disabled> Choisir statut</option>
-    <option value="en-attente">En attente</option>
-    <option value="approuvé">Approuvé</option>
-    <option value="refusé">Refusé</option>
-  </select>
-
-  <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 float-right">
-    <option selected disabled> Choisir période </option>
-    <option value="ce-mois">Ce mois</option>
-    <option value="3-mois">3 derniers mois</option>
-    <option value="année">Cette année</option>
-  </select>
-  </div>
-</div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                <!-- Carte 1 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+         <!-- Carte 1 -->
+                        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
                     <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
                         <i class="fas fa-clock"></i> En attente
                     </span>
@@ -71,13 +101,13 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive" disabled>Approuver</button>
+                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white  hover:bg-orange-500 text-xs md:text-sm button-responsive" disabled>Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 
                 <!-- Carte 2 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+                       <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
                     <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right"> <i
                                     class="fas fa-check-circle"></i> Approuvé</span>
                     <p class="font-semibold text-sm md:text-base">Salma ELQADI</p>
@@ -87,14 +117,14 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive">Approuver</button>
+                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs  hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 
                 <!-- Répétez le même modèle pour les autres cartes -->
                 <!-- Carte 3 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+                      <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
                      <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i
                                         class="fas fa-xmark"></i> Refusé</span>
                     <p class="font-semibold text-sm md:text-base">Latifa OUAMOU</p>
@@ -104,13 +134,13 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive">Approuver</button>
+                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 
                <!-- Carte 1 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+             <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
                     <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
                         <i class="fas fa-clock"></i> En attente
                     </span>
@@ -121,13 +151,13 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive" disabled>Approuver</button>
+                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white  hover:bg-orange-500 text-xs md:text-sm button-responsive" disabled>Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 
                 <!-- Carte 2 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+                      <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
                     <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right"> <i
                                     class="fas fa-check-circle"></i> Approuvé</span>
                     <p class="font-semibold text-sm md:text-base">Marie Dubois</p>
@@ -137,12 +167,13 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive">Approuver</button>
+                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 <!-- Carte 3 -->
-                <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
+
                      <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i
                                         class="fas fa-xmark"></i> Refusé</span>
                     <p class="font-semibold text-sm md:text-base">Marie Dubois</p>
@@ -152,28 +183,27 @@
                     <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
                     <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
                     <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs md:text-sm button-responsive">Approuver</button>
+                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs  hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
                         <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
                     </div>
                 </div>
                 
-                </div>
-            </div>
-             <div class="flex justify-end space-x-3 mt-4">
-  <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg 
-                 hover:bg-gray-300 transition duration-300 ease-in-out">
-    Previous
-  </button>
-            <span class="text-gray-500 font-bold mt-2">1/5</span>
+      </div>
 
-  
-  <button class="px-4 py-2 bg-orange-500 text-white rounded-lg 
-                 hover:bg-orange-600 transition duration-300 ease-in-out">
-    Next
-  </button>
-</div>
-        </section>
-    </main>
-    <script src="../Script/script.js"></script>
+      <!-- Pagination -->
+      <div class="flex justify-end items-center space-x-3 mt-6">
+        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">
+          Previous
+        </button>
+        <span class="text-gray-500 font-bold">1/5</span>
+        <button class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-300">
+          Next
+        </button>
+      </div>
+    </section>
+  </main>
+
+
+  <script src="../Script/script.js"></script>
 </body>
 </html>
