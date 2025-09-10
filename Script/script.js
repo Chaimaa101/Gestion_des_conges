@@ -69,9 +69,11 @@ sidebare.innerHTML = `
         </div>
 
     </header>
+
 `
+// FOOTER
 const footer = document.createElement('div')
-footer.innerHTML= `
+footer.innerHTML = `
  <footer id="mainContent" class="mainContent bg-orange-50 text-gray-600 ml-64">
         <div class="container px-4 py-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -162,56 +164,272 @@ const main = document.querySelector('main')
 body.prepend(sidebare)
 body.append(footer)
 
+// SIDBAR TOGGLE
 
-        const sidebar = document.getElementById("sidebar") 
-        const mainContent = document.querySelectorAll(".mainContent") 
-        const toggleBtn = document.getElementById("toggleBtn") 
-        const sidebarLinks = document.querySelectorAll(".sidebar-text") 
-  
-        let isCollapsed = false 
+const sidebar = document.getElementById("sidebar")
+const mainContent = document.querySelectorAll(".mainContent")
+const toggleBtn = document.getElementById("toggleBtn")
+const sidebarLinks = document.querySelectorAll(".sidebar-text")
 
-        toggleBtn.addEventListener("click", () => {
-            isCollapsed = !isCollapsed 
+let isCollapsed = false
 
-            if (isCollapsed) {
-                sidebar.classList.replace("w-64", "w-20") 
-                mainContent.forEach(el => {
-    el.classList.replace("ml-64", "ml-20") }) 
-                sidebarLinks.forEach(el => el.classList.add("hidden")) 
-                toggleBtn.innerHTML = `<i class="fas fa-angle-right"></i>` 
-            } else {
-                sidebar.classList.replace("w-20", "w-64") 
-              mainContent.forEach(el => {
-    el.classList.replace("ml-20", "ml-64") }) 
-                sidebarLinks.forEach(el => el.classList.remove("hidden")) 
-                toggleBtn.innerHTML = `<i class="fas fa-angle-left"></i>` 
-            }
-        }) 
+toggleBtn.addEventListener("click", () => {
+    isCollapsed = !isCollapsed
+
+    if (isCollapsed) {
+        sidebar.classList.replace("w-64", "w-20")
+        mainContent.forEach(el => {
+            el.classList.replace("ml-64", "ml-20")
+        })
+        sidebarLinks.forEach(el => el.classList.add("hidden"))
+        toggleBtn.innerHTML = `<i class="fas fa-angle-right"></i>`
+    } else {
+        sidebar.classList.replace("w-20", "w-64")
+        mainContent.forEach(el => {
+            el.classList.replace("ml-20", "ml-64")
+        })
+        sidebarLinks.forEach(el => el.classList.remove("hidden"))
+        toggleBtn.innerHTML = `<i class="fas fa-angle-left"></i>`
+    }
+})
 
 
 sidebarLinks.forEach(el => {
-  el.addEventListener('click', () => {
-    sidebarLinks.forEach(link => link.classList.remove('active'));
+    el.addEventListener('click', () => {
+        sidebarLinks.forEach(link => link.classList.remove('active'));
 
-    el.classList.add('active');
-  });
+        el.classList.add('active');
+    });
 });
 
+// notif
+function showSlide(index) {
+    const carousel = document.getElementById('carousel');
+    const translateValue = -index * 33.3333;
+    carousel.style.transform = `translateX(${translateValue}%)`;
 
-         function showSlide(index) {
-            const carousel = document.getElementById('carousel');
-            const translateValue = -index * 33.3333;
-            carousel.style.transform = `translateX(${translateValue}%)`;
-            
 
-            const navDots = document.querySelectorAll('.carousel-nav');
-            navDots.forEach((dot, i) => {
-                if (i === index) {
-                    dot.classList.remove('bg-gray-300');
-                    dot.classList.add('bg-blue-500');
-                } else {
-                    dot.classList.remove('bg-blue-500');
-                    dot.classList.add('bg-gray-300');
-                }
-            });
+    const navDots = document.querySelectorAll('.carousel-nav');
+    navDots.forEach((dot, i) => {
+        if (i === index) {
+            dot.classList.remove('bg-gray-300');
+            dot.classList.add('bg-blue-500');
+        } else {
+            dot.classList.remove('bg-blue-500');
+            dot.classList.add('bg-gray-300');
         }
+    });
+}
+
+const connected_user = 1;
+
+const afficheUserConges = async (id) => {
+    let res = await axios.get(`http://localhost:4000/conges`);
+    let userConges = res.data.filter(conge => conge.id_employee === id);
+
+    const tableBody = document.querySelector(".show");
+    tableBody.innerHTML = ``;
+
+    userConges.forEach(element => {
+        element.conges.forEach(conge => {
+            const row = document.createElement("tr");
+            row.setAttribute("data-id", conge.id_conge);
+
+            row.innerHTML = `
+                <td class="p-3">${conge.type_conge}</td>
+                <td class="p-3">
+                    ${
+                        conge.status_conge === "approuvé"
+                            ? `<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                <i class="fas fa-check mr-1"></i> Approuvé</span>`
+                            : conge.status_conge === "refusé"
+                                ? `<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                                    <i class="fas fa-times mr-1"></i> Refusé</span>`
+                                : `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                    <i class="fas fa-clock mr-1"></i> En attente</span>`
+                    }
+                </td>
+                <td class="p-3">${conge.duree} jours</td>
+                <td class="p-3">${conge.type_conge}</td>
+                <td class="p-3">
+                    <button class="edit text-blue-500 hover:text-blue-700 mr-2" onClick="editConge('${conge.id_conge}')">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    });
+
+    // ✅ totals calculation
+    let allConges = userConges.flatMap(e => e.conges);
+    let refused = allConges.filter(cg => cg.status_conge === "refusé").length;
+    let accepted = allConges.filter(cg => cg.status_conge === "approuvé").length;
+    let pending = allConges.filter(cg => cg.status_conge === "en attente").length;
+
+    document.querySelector(".refused").textContent = refused;
+    document.querySelector(".accepted").textContent = accepted;
+    document.querySelector(".pending").textContent = pending;
+}
+const modal = document.querySelector('.modal')
+const closeModalBtn = document.getElementById('closeModal')
+const editButtons = document.querySelectorAll('.edit');
+const congeForm = document.getElementById('congeForm');
+
+const editConge = async (congeId) => {
+    modalOpen();
+    try {
+        // 👉 get employee + his congés
+        const response = await axios.get(`http://localhost:4000/conges`);
+        const employee = response.data.find(e => e.id_employee === connected_user);
+
+        if (!employee) {
+            console.error("Employé introuvable !");
+            return;
+        }
+
+        // 👉 on cherche le congé par son id
+        const conge = employee.conges.find(c => c.id_conge === congeId);
+
+
+        if (!conge) {
+            console.error("Congé introuvable !");
+            return;
+        }
+
+        console.log(employee);
+        console.log(conge);
+
+        // 👉 fill modal inputs
+        congeForm.congeId.value = congeId;
+        congeForm.startDate.value = conge.date_debut;
+        congeForm.endDate.value = conge.date_fin;
+        congeForm.congeType.value = conge.type_conge;
+        congeForm.justification.value = conge.justification;
+
+        // 👉 handle submit
+        congeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const updatedConge = {
+                date_debut: congeForm.startDate.value,
+                date_fin: congeForm.endDate.value,
+                type_conge: congeForm.congeType.value,
+                justification: congeForm.justification.value,
+            };
+
+            try {
+                await axios.put(`http://localhost:4000/conges/${congeId}`, updatedConge);
+                alert("✅ Congé mis à jour !");
+                modalClose();
+                afficheUserConges(connected_user); // refresh table
+            } catch (err) {
+                console.error("Erreur lors de la mise à jour", err);
+            }
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+const afficherAllConges = async () => {
+    let res = await axios.get(`http://localhost:4000/conges`);
+
+    res.data.forEach(element => {
+        element.conges.forEach(conge => {
+            let cards = document.querySelector('#leaves')
+            let card = document.createElement('div')
+            card.innerHTML = `
+            <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
+           ${conge.status_conge === "approuvé" 
+                            ? `<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right status-badge">
+                                <i class="fas fa-check text-green-600 text-xs mr-1"></i> Approuvé</span>` 
+                            : conge.status_conge === "refusé" 
+                                ? `<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right status-badge"> 
+                                    <i class="fas fa-times mr-1"></i> Refusé</span>` 
+                                : `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right status-badge">
+                                    <i class="fas fa-clock mr-1"></i> En attente</span>`
+                        }
+          <p class="font-semibold text-sm md:text-base"> ${element.prenom_employee} ${element.nom_employee}</p>
+          <p class="mb-2 text-xs md:text-sm text-gray-600">Data Analyste</p>
+          <p class="text-xs md:text-sm text-gray-600">Type: <span class="float-right font-bold">${conge.type_conge}</span></p>
+
+          <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">${conge.date_debut}</span></p>
+          <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">${conge.date_fin}</span></p>
+          <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">${conge.duree} jours</span></p>
+          <div class="flex space-x-2">
+            <button class="bg-orange-400 px-3 py-1 rounded text-white text-xs md:text-sm hover:bg-orange-500 transition disabled:opacity-50" disabled>
+              Approuver
+            </button>
+            <button class="bg-orange-100 px-3 py-1 rounded text-xs md:text-sm hover:bg-orange-200 transition">
+              Refuser
+            </button>
+          </div>
+        </div>
+        `
+            cards.append(card)
+        })
+
+    })
+}
+// edit 
+
+  function modalOpen() {
+            modal.classList.remove('opacity-0');
+            modal.classList.remove('pointer-events-none');
+            document.body.style.overflow = 'hidden'; 
+        }
+  function modalClose() {
+            modal.classList.add('opacity-0');
+            modal.classList.add('pointer-events-none');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+
+const addForm = document.getElementById('add-form');
+
+addForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+    const congeType = document.getElementById("congeType").value;
+    const justification = document.getElementById("justification").value;
+
+    const newConge = {
+        id_conge: Date.now(),   // 👈 identifiant unique
+        date_debut: startDate,
+        date_fin: endDate,
+        type_conge: congeType,
+        justification: justification,
+        status_conge: "en attente" // par défaut en attente
+    };
+const res = await axios.get(`http://localhost:4000/conges/${connected_user}`);
+     let employee = res.data;
+
+        // 2. Ajouter le congé dans son tableau
+        employee.conges.push(newConge);
+
+        // 3. Mettre à jour l'employé avec le nouveau tableau
+        await axios.put(`http://localhost:4000/conges/${connected_user}`, employee)
+
+       
+            addForm.reset();
+
+            afficheUserConges(connected_user); // refresh table
+            alert("✅ Congé ajouté avec succès !");
+        })
+       
+
+
+
+try {
+    afficheUserConges(connected_user);
+    afficherAllConges()
+} catch (error) {
+    console.error(error);
+}

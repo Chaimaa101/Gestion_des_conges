@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="../Style/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>Administration</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
   <main class="mainContent flex-1 ml-64 md:ml-64 p-4 md:p-6 transition-all duration-500 ease-in-out">
     
-    <!-- Title -->
     <h2 class="text-xl md:text-2xl font-bold text-black mb-4 md:mb-6 animate-fadeIn">
-      Mes congés
+      Gestion des congés
     </h2>
     
     <!-- Stats Section -->
@@ -42,13 +42,11 @@
       </div>
     </div>
 
-    <!-- Requests Section -->
     <section class="bg-white p-3 md:p-4 shadow-md rounded animate-fadeIn">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         
         <h3 class="text-md md:text-lg font-semibold">Demandes de congés</h3>
-        
-        <!-- Filters -->
+      
         <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
             <option selected disabled>Choisir statut</option>
@@ -66,131 +64,11 @@
         </div>
       </div>
 
-      <!-- Requests Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mt-4">
-        
-        <!-- Example card -->
-        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-          <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
-            <i class="fas fa-clock"></i> En attente
-          </span>
-          <p class="font-semibold text-sm md:text-base">Chaimaâ AFKIR</p>
-          <p class="mb-2 text-xs md:text-sm text-gray-600">Data Analyste</p>
-          <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-          <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-          <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-          <div class="flex space-x-2">
-            <button class="bg-orange-400 px-3 py-1 rounded text-white text-xs md:text-sm hover:bg-orange-500 transition disabled:opacity-50" disabled>
-              Approuver
-            </button>
-            <button class="bg-orange-100 px-3 py-1 rounded text-xs md:text-sm hover:bg-orange-200 transition">
-              Refuser
-            </button>
-          </div>
-        </div>
-
-         <!-- Carte 1 -->
-                        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
-                        <i class="fas fa-clock"></i> En attente
-                    </span>
-                    <p class="font-semibold text-sm md:text-base">Chaimaâ AFKIR</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Data Analyste</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white  hover:bg-orange-500 text-xs md:text-sm button-responsive" disabled>Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
-                
-                <!-- Carte 2 -->
-                       <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                    <p class="font-semibold text-sm md:text-base">Salma ELQADI</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Network Engineer</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs  hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
-                
-                <!-- Répétez le même modèle pour les autres cartes -->
-                <!-- Carte 3 -->
-                      <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-                     <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i
-                                        class="fas fa-xmark"></i> Refusé</span>
-                    <p class="font-semibold text-sm md:text-base">Latifa OUAMOU</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Backend developer</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
-                
-               <!-- Carte 1 -->
-             <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right">
-                        <i class="fas fa-clock"></i> En attente
-                    </span>
-                    <p class="font-semibold text-sm md:text-base">Rania ELbadawi</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Web designer</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button type="submit" class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white  hover:bg-orange-500 text-xs md:text-sm button-responsive" disabled>Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
-                
-                <!-- Carte 2 -->
-                      <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                    <p class="font-semibold text-sm md:text-base">Marie Dubois</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Analyste</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
-                <!-- Carte 3 -->
-        <div class="p-3 md:p-4 rounded shadow-md border border-gray-100 hover:shadow-lg transition duration-300 animate-slideUp">
-
-                     <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right"> <i
-                                        class="fas fa-xmark"></i> Refusé</span>
-                    <p class="font-semibold text-sm md:text-base">Marie Dubois</p>
-                    <p class="mb-2 text-xs md:text-sm text-gray-600">Analyste</p>
-                    <p class="text-bold text-gray-600 text-xs md:text-sm">Type: <span class="float-right font-bold">Congé payé</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">22 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">23 Jan 2025</span></p>
-                    <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">5 jours</span></p>
-                    <div class="flex space-x-2">
-                        <button class="bg-orange-400 px-2 py-1 md:px-3 md:py-1 rounded text-white text-xs  hover:bg-orange-500 md:text-sm button-responsive">Approuver</button>
-                        <button class="bg-orange-100 px-2 py-1 md:px-3 md:py-1 rounded text-xs md:text-sm button-responsive">Refuser</button>
-                    </div>
-                </div>
+      <div id="leaves" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mt-4">
+    <!-------- All cards here-->
                 
       </div>
 
-      <!-- Pagination -->
       <div class="flex justify-end items-center space-x-3 mt-6">
         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">
           Previous

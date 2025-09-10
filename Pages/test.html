@@ -9,6 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <title>Sidebar Toggle</title>
+   <style>
+        /* Animation pour le modal */
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .modal-container {
+            transform: scale(0.9);
+            transition: transform 0.25s ease;
+        }
+        .modal-active {
+            transform: scale(1);
+        }
+        
+        /* Styles pour le tableau responsive */
+        @media (max-width: 768px) {
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            .mobile-card {
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                margin-bottom: 1rem;
+                background: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
 </head>
 <body class="flex bg-gray-100">
 
@@ -129,7 +158,348 @@
         </div>
     </div>
 
+
+
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Mes demandes de congé</h1>
+        
+        <!-- Statistiques -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-orange-200 p-4 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-check text-orange-500 text-xl mr-2"></i>
+                    <div>
+                        <p class="text-sm text-gray-600">Congés restants</p>
+                        <p class="text-2xl font-bold">28 jours</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-100 p-4 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>
+                    <div>
+                        <p class="text-sm text-green-700">Approuvés</p>
+                        <p class="text-2xl font-bold">5</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-yellow-600 text-xl mr-2"></i>
+                    <div>
+                        <p class="text-sm text-yellow-700">En attente</p>
+                        <p class="text-2xl font-bold">3</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-red-100 p-4 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-times-circle text-red-600 text-xl mr-2"></i>
+                    <div>
+                        <p class="text-sm text-red-700">Refusés</p>
+                        <p class="text-2xl font-bold">1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau des demandes -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <div class="table-container">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 text-gray-500 text-sm">
+                        <tr>
+                            <th class="p-3 font-medium">Demandé par</th>
+                            <th class="p-3 font-medium">Statut</th>
+                            <th class="p-3 font-medium">Durée</th>
+                            <th class="p-3 font-medium">Type</th>
+                            <th class="p-3 font-medium">Période</th>
+                            <th class="p-3 font-medium">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="p-3">Pierre Martin</td>
+                            <td class="p-3">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                                    Approuvé
+                                </span>
+                            </td>
+                            <td class="p-3">5 jours</td>
+                            <td class="p-3">Congés payés</td>
+                            <td class="p-3">12-17 Mars 2023</td>
+                            <td class="p-3">
+                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="1">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Marie Dubois</td>
+                            <td class="p-3">
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">
+                                    En attente
+                                </span>
+                            </td>
+                            <td class="p-3">3 jours</td>
+                            <td class="p-3">RTT</td>
+                            <td class="p-3">20-23 Avril 2023</td>
+                            <td class="p-3">
+                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="2">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Jean Petit</td>
+                            <td class="p-3">
+                                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">
+                                    Refusé
+                                </span>
+                            </td>
+                            <td class="p-3">10 jours</td>
+                            <td class="p-3">Congés sans solde</td>
+                            <td class="p-3">5-15 Mai 2023</td>
+                            <td class="p-3">
+                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="3">
+                                    <i class="fas fa-edit"></i> Modifier
+                                </button>
+                                <button class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0">
+            <div class="text-sm text-gray-500">
+                Affichage de 1 à 3 sur 10 demandes
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                    <i class="fas fa-chevron-left mr-2 text-xs"></i> Précédent
+                </button>
+                <div class="flex space-x-1">
+                    <button class="w-8 h-8 bg-orange-500 text-white rounded-lg">1</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">2</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">3</button>
+                    <span class="px-2 py-2">...</span>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">5</button>
+                </div>
+                <button class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center">
+                    Suivant <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal d'édition -->
+    <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none" id="editModal">
+        <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 px-6">
+                <!-- En-tête du modal -->
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-xl font-bold text-gray-800">Modifier la demande de congé</h3>
+                    <button class="modal-close text-gray-500 hover:text-gray-700" id="closeModal">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Corps du modal -->
+                <form id="leaveForm" class="space-y-4">
+                    <input type="hidden" id="leaveId" value="">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
+                            <input type="date" id="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
+                            <input type="date" id="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
+                        <select id="leaveType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="paid">Congés payés</option>
+                            <option value="rtt">RTT</option>
+                            <option value="sick">Congés maladie</option>
+                            <option value="unpaid">Congés sans solde</option>
+                            <option value="parental">Congés maternité/paternité</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">Justification</label>
+                        <textarea id="justification" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Expliquez la raison de votre demande"></textarea>
+                    </div>
+                    
+                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                        <h4 class="text-lg font-semibold text-orange-800 mb-2 flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i> Information importante
+                        </h4>
+                        <p class="text-orange-700">
+                            Toute modification sera soumise à l'approbation de votre manager. Les congés déjà approuvés pourraient nécessiter une nouvelle validation.
+                        </p>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors" id="cancelEdit">
+                            Annuler
+                        </button>
+                        <button type="submit" class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
+                            Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Données de démonstration pour les demandes de congé
+        const leaveRequests = {
+            1: {
+                employee: "Pierre Martin",
+                startDate: "2023-03-12",
+                endDate: "2023-03-17",
+                type: "paid",
+                justification: "Vacances en famille à la montagne",
+                status: "approved"
+            },
+            2: {
+                employee: "Marie Dubois",
+                startDate: "2023-04-20",
+                endDate: "2023-04-23",
+                type: "rtt",
+                justification: "Réduction du temps de travail",
+                status: "pending"
+            },
+            3: {
+                employee: "Jean Petit",
+                startDate: "2023-05-05",
+                endDate: "2023-05-15",
+                type: "unpaid",
+                justification: "Voyage à l'étranger",
+                status: "refused"
+            }
+        };
+
+        // Éléments du DOM
+        const modal = document.getElementById('editModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const cancelEditBtn = document.getElementById('cancelEdit');
+        const editButtons = document.querySelectorAll('.edit-btn');
+        const leaveForm = document.getElementById('leaveForm');
+
+        // Ouvrir le modal avec les données
+        editButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const leaveId = button.getAttribute('data-id');
+                const leaveData = leaveRequests[leaveId];
+                
+                if (leaveData) {
+                    document.getElementById('leaveId').value = leaveId;
+                    document.getElementById('startDate').value = leaveData.startDate;
+                    document.getElementById('endDate').value = leaveData.endDate;
+                    document.getElementById('leaveType').value = leaveData.type;
+                    document.getElementById('justification').value = leaveData.justification;
+                    
+                    openModal();
+                }
+            });
+        });
+
+        // Ouvrir le modal
+        function openModal() {
+            modal.classList.remove('opacity-0');
+            modal.classList.remove('pointer-events-none');
+            document.querySelector('.modal-container').classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        }
+
+        // Fermer le modal
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modal.classList.add('pointer-events-none');
+            document.querySelector('.modal-container').classList.remove('modal-active');
+            document.body.style.overflow = 'auto'; // Permettre le défilement
+        }
+
+        // Événements pour fermer le modal
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelEditBtn.addEventListener('click', closeModal);
+        
+        // Fermer en cliquant à l'extérieur du modal
+        modal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        });
+
+        // Soumission du formulaire
+        leaveForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Récupérer les valeurs du formulaire
+            const leaveId = document.getElementById('leaveId').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const leaveType = document.getElementById('leaveType').value;
+            const justification = document.getElementById('justification').value;
+            
+            // Ici, vous enverriez normalement les données au serveur
+            console.log('Données à envoyer:', {
+                id: leaveId,
+                startDate,
+                endDate,
+                leaveType,
+                justification
+            });
+            
+            // Simulation de sauvegarde réussie
+            alert('Modifications enregistrées avec succès!');
+            closeModal();
+        });
+
+        // Calcul automatique de la durée
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        
+        function calculateDuration() {
+            if (startDateInput.value && endDateInput.value) {
+                const start = new Date(startDateInput.value);
+                const end = new Date(endDateInput.value);
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                
+                // Vous pourriez afficher cette durée quelque part
+                console.log(`Durée: ${diffDays} jours`);
+            }
+        }
+        
+        startDateInput.addEventListener('change', calculateDuration);
+        endDateInput.addEventListener('change', calculateDuration);
+   
+
         function showSlide(index) {
             const carousel = document.getElementById('carousel');
             const translateValue = -index * 33.3333;

@@ -9,12 +9,13 @@
     <link rel="shortcut icon" href="../Images/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../Style/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
-    
+
     <main id="mainContent" class="mainContent flex-1 ml-64 p-6 ">
-       
+
         <h2 class="text-2xl font-bold text-black mb-6">Mes congés</h2>
         <div class="statistic grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div class="card bg-orange-200 p-4 rounded-lg shadow-sm">
@@ -25,17 +26,17 @@
             <div class="card bg-green-100 p-4 rounded-lg shadow-sm ">
                 <i class="fas fa-check-circle text-green-800 text-xl mb-2"></i>
                 <p class="text-sm text-green-800">Approuvés</p>
-                <p class="text-2xl font-bold">5 jours</p>
+                <p class=" accepted text-2xl font-bold"></p>
             </div>
             <div class="card bg-yellow-100 p-4 rounded-lg shadow-sm ">
                 <i class="fas fa-clock text-yellow-800 text-xl mb-2"></i>
                 <p class="text-sm text-yellow-800">En attente</p>
-                <p class="text-2xl font-bold">23 jours</p>
+                <p class=" pending text-2xl font-bold"></p>
             </div>
             <div class="card bg-red-100 p-4 rounded-lg shadow-sm ">
                 <i class="fas fa-times-circle text-red-800 text-xl mb-2"></i>
                 <p class="text-sm text-red-800">Refusés</p>
-                <p class="text-2xl font-bold">0 jour</p>
+                <p class=" refused text-2xl font-bold"> </p>
             </div>
         </div>
 
@@ -50,215 +51,8 @@
                         <th class="p-3 " >Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"> <i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">28 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3 ">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                        </td>
-                        <td class="p-3">28 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3"> Approuvé par Juan Ales</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                        </td>
-                        <td class="p-3">28 jours</td>
-                        <td class="p-3">Congé payé</td>
-                                                <td class="p-3"> Approuvé par Juan Ales</td>
-
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                        </td>
-                        <td class="p-3">28 jours</td>
-                        <td class="p-3">Congé payé</td>
-                                               <td class="p-3"> Approuvé par Juan Ales</td>
-
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs"> <i
-                                    class="fas fa-check-circle"></i> Approuvé</span>
-                        </td>
-                        <td class="p-3">28 jours</td>
-                        <td class="p-3">Congé payé</td>
-                                                <td class="p-3"> Approuvé par Juan Ales</td>
-
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs"> <i
-                                    class="fas fa-times-circle"></i> Refusé</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                                               <td class="p-3"> Refusée par Juan Ales</td>
-
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"> <i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                      
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"> <i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"> <i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"> <i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"><i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"><i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"><i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-3">Karthi Modesh</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs"><i
-                                    class="fas fa-clock"></i> En attente</span>
-                        </td>
-                        <td class="p-3">25 jours</td>
-                        <td class="p-3">Congé payé</td>
-                        <td class="p-3">
-                            <button class="text-blue-500 hover:text-blue-700 mr-2">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="text-red-500 hover:text-red-700">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
+                <tbody class="show divide-y divide-gray-200">
+                   <!---- data here-->
                 </tbody>
             </table>
 
@@ -277,6 +71,67 @@
   </button>
 </div>
     </main>
+    
+ <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none" id="editModal">
+        <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+        
+        <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
+            <div class="modal-content py-4 px-6">
+
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-xl font-bold text-gray-800">Modifier la demande de congé</h3>
+                    <button class="closeModal modal-close text-gray-500 hover:text-gray-700" id="closeModal" onclick=modalClose()>
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Corps du modal -->
+                <form id="congeForm" class="space-y-4">
+                    <input type="hidden" id="congeId" value="">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
+                            <input type="date" id="startDate" name="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
+                            <input type="date" id="endDate" name="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
+                        <select id="congeType" name="congeType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="paid">Congés payés</option>
+                            <option value="rtt">RTT</option>
+                            <option value="sick">Congés maladie</option>
+                            <option value="unpaid">Congés sans solde</option>
+                            <option value="parental">Congés maternité/paternité</option>
+                            <option value="other">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2 font-medium">Justification</label>
+                        <textarea id="justification" name="justification" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Expliquez la raison de votre demande"></textarea>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors" onclick="modalClose()">
+                            Annuler
+                        </button>
+                        <button type="submit" class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
+                            Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
 <script src="../Script/script.js"></script>
 </body>
 
