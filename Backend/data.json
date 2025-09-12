@@ -2,33 +2,41 @@
   "employees": [
     {
       "id": "1",
-      "nom": "Albert",
-      "prenom": "Zitan",
+      "nom": "Chaimaa",
+      "prenom": "Afkir",
       "poste": "Data Analyste",
       "email": "albert.zitan@entreprise.com",
       "solde_conge": "40"
     },
     {
       "id": "2",
-      "nom": "Dupont",
-      "prenom": "Marie",
+      "nom": "Salma",
+      "prenom": "ELQADI",
       "poste": "Développeuse",
       "email": "marie.dupont@entreprise.com",
       "solde_conge": "20"
     },
     {
       "id": "3",
-      "nom": "DCD",
-      "prenom": "MaEFCVDFVrie",
+      "nom": "Latifa",
+      "prenom": "OUAMOU",
       "poste": "Développeuse",
       "email": "marie.dupont@entreprise.com",
-      "solde_conge": "30"
+      "solde_conge": 25
+    },
+    {
+      "id": "4",
+      "nom": "Rania",
+      "prenom": "ELBADAOUI",
+      "poste": "Développeuse",
+      "email": "marie.dupont@entreprise.com",
+      "solde_conge": 25
     }
   ],
   "conges": [
     {
-      "id": "6",
-      "id_employee": 1,
+      "id": "1",
+      "id_employee": 4,
       "type_conge": "Congés payés",
       "status_conge": "approuvé",
       "justification": "aukdfkserf",
@@ -38,7 +46,7 @@
       "date_demande": "2025-04-20"
     },
     {
-      "id": "4",
+      "id": "2",
       "id_employee": 1,
       "type_conge": "Congés maladie",
       "status_conge": "approuvé",
@@ -48,7 +56,7 @@
       "duree": 10
     },
     {
-      "id": "5",
+      "id": "3",
       "id_employee": 2,
       "type_conge": "Congés maladie",
       "status_conge": "refusé",
@@ -58,7 +66,7 @@
       "duree": 4
     },
     {
-      "id": "8",
+      "id": "4",
       "id_employee": 2,
       "type_conge": "RTT",
       "status_conge": "approuvé",
@@ -68,8 +76,8 @@
       "duree": 6
     },
     {
-      "id": "10",
-      "id_employee": 3,
+      "id": "5",
+      "id_employee": 1,
       "type_conge": "Congés payés",
       "status_conge": "approuvé",
       "justification": "BJJHHJH",
@@ -78,8 +86,8 @@
       "duree": 9
     },
     {
-      "id": "2",
-      "id_employee": 3,
+      "id": "6",
+      "id_employee": 2,
       "type_conge": "Congés maladie",
       "status_conge": "approuvé",
       "justification": "BJHHDSH",
@@ -88,7 +96,7 @@
       "duree": 8
     },
     {
-      "id": "11",
+      "id": "7",
       "id_employee": 3,
       "type_conge": "RTT",
       "status_conge": "approuvé",
@@ -98,7 +106,7 @@
       "duree": 5
     },
     {
-      "id": "16",
+      "id": "8",
       "id_employee": 3,
       "type_conge": "Congés maladie",
       "status_conge": "approuvé",
@@ -108,18 +116,18 @@
       "duree": 2
     },
     {
-      "id": "7",
-      "id_employee": 1,
+      "id": "9",
+      "id_employee": 2,
       "type_conge": "Congés maladie",
-      "status_conge": "en attente",
+      "status_conge": "approuvé",
       "justification": "uhaed",
       "date_debut": "2025-09-16",
       "date_fin": "2025-09-20",
       "duree": 5
     },
     {
-      "id": "13",
-      "id_employee": 1,
+      "id": "10",
+      "id_employee": 4,
       "type_conge": "Autre",
       "status_conge": "approuvé",
       "justification": "jldcwsdujhkcfdwscfwsdjhf",
@@ -128,20 +136,50 @@
       "duree": 4
     },
     {
-      "id": "Math.floor((Math.random()*20)+1)",
-      "id_employee": 1,
+      "id": "11",
+      "id_employee": 4,
+      "type_conge": "Sans solde",
+      "status_conge": "approuvé",
+      "justification": "buhggyusdgyufc",
+      "date_debut": "2025-09-24",
+      "date_fin": "2025-09-28",
+      "duree": 5
+    },
+    {
+      "id": "12",
+      "id_employee": 2,
       "type_conge": "RTT",
+      "status_conge": "refusé",
+      "justification": "gyuyuhhhkhiki",
+      "date_debut": "2025-09-30",
+      "date_fin": "2025-11-06",
+      "duree": 38
+    },
+    {
+      "id": "13",
+      "id_employee": 3,
+      "type_conge": "RTT",
+      "status_conge": "refusé",
+      "justification": "jnkjnkjj,kljkl,",
+      "date_debut": "2025-09-14",
+      "date_fin": "2025-09-27",
+      "duree": 14
+    },
+    {
+      "id": "14",
+      "id_employee": 1,
+      "type_conge": "Congés maternité",
       "status_conge": "en attente",
-      "justification": "DJNKCJKQCFJKDQS",
-      "date_debut": "2025-09-13",
-      "date_fin": "2025-09-16",
-      "duree": 4
+      "justification": "gvh<xq",
+      "date_debut": "2025-09-05",
+      "date_fin": "2025-09-14",
+      "duree": 10
     }
   ],
   "notifications": [
     {
       "id": "1",
-      "id_employee": 1,
+      "id_employee": 2,
       "message": "Votre demande de congé du 22/01/2025 est en attente.",
       "date": "2025-01-15T10:30:00Z"
     },
@@ -153,7 +191,7 @@
     },
     {
       "id": "4",
-      "id_employee": 2,
+      "id_employee": 4,
       "message": "Votre demande de congé du 22/01/2025 est en attente.",
       "date": "2025-01-15T10:30:00Z"
     },
@@ -162,6 +200,18 @@
       "id_employee": 2,
       "message": "Votre congé maladie du 10/02/2025 a été approuvé.",
       "date": "2025-02-05T14:15:00Z"
+    },
+    {
+      "id": "ad24",
+      "id_employee": 1,
+      "message": "Votre congé (2025-09-24 au 2025-09-28) a été ajouté avec succès.",
+      "date": "2025-09-12T20:20:18.344Z"
+    },
+    {
+      "id": "b53d",
+      "id_employee": 4,
+      "message": "Votre congé (2025-09-30 au 2025-11-06) a été ajouté avec succès.",
+      "date": "2025-09-12T20:27:17.580Z"
     }
   ]
 }
