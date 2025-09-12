@@ -19,3 +19,26 @@
     .animate-fadeIn { animation: fadeIn 0.8s ease-in-out; }
     .animate-slideUp { animation: slideUp 0.8s ease-in-out; }
   
+
+        
+        
+ .notification-dot {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+   .tab-button.tab-active {
+            border-bottom: 3px solid #f97316;
+            color: #f97316;
+            font-weight: bold;
+        }

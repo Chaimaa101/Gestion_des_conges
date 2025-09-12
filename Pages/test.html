@@ -1,372 +1,294 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Congés</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <title>Sidebar Toggle</title>
-   <style>
-        /* Animation pour le modal */
-        .modal {
-            transition: opacity 0.25s ease;
-        }
-        .modal-container {
-            transform: scale(0.9);
-            transition: transform 0.25s ease;
-        }
-        .modal-active {
-            transform: scale(1);
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-in-out;
         }
         
-        /* Styles pour le tableau responsive */
-        @media (max-width: 768px) {
-            .table-container {
-                overflow-x: auto;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .status-badge {
+            font-size: 0.7rem;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #f97316;
+            color: #f97316;
+            font-weight: bold;
+        }
+        
+        .notification-dot {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 1023px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                z-index: 40;
+                height: 100vh;
+                overflow-y: auto;
             }
             
-            .mobile-card {
-                border: 1px solid #e5e7eb;
-                border-radius: 0.5rem;
-                padding: 1rem;
-                margin-bottom: 1rem;
-                background: white;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            .sidebar.open {
+                left: 0;
             }
         }
     </style>
 </head>
-<body class="flex bg-gray-100">
-
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar fixed w-64 bg-orange-50 h-screen shadow-md flex flex-col transition-all duration-300">
-        <!-- Bouton toggle -->
-        <div class="p-3 flex justify-end">
-            <button id="toggleBtn" class="text-gray-600 hover:text-gray-900">
-                <i class="fas fa-angle-left"></i>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Menu mobile -->
+    <div class="lg:hidden fixed top-0 left-0 right-0 bg-white shadow-md p-4 z-50 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-gray-800">Gestion des Congés</h1>
+        <button id="mobileMenuButton" class="text-gray-600">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+        <div class="relative">
+            <button id="notificationButton" class="text-gray-600 relative">
+                <i class="fas fa-bell text-xl"></i>
+                <span class="notification-dot">3</span>
             </button>
         </div>
-
-        <div class="logo p-5 border-b border-gray-200">
-            <h1 id="sidebarTitle" class="text-2xl font-bold text-gray-500">RH Dashboard</h1>
-        </div>
-
-        <div class="userInfo p-5 border-b border-gray-200 flex flex-col items-center">
-            <img src="https://placehold.co/80x80/FEAF00/FFFFFF?text=KM" alt="Photo profil"
-                class="rounded-full w-20 h-20 border-2 border-orange-300 mb-3">
-            <h3 id="userName" class="font-semibold text-orange-300">Karthi Modesh</h3>
-            <h4 id="userRole" class="text-sm text-gray-500">User</h4>
-        </div>
-
-        <ul class="p-3 flex-1">
-            <li class="mb-2">
-                <a href="list_leaves.html" class="flex items-center p-3 text-gray-600 rounded-lg">
-                    <i class="fas fa-list w-6"></i>
-                    <span class="ml-3 sidebar-text">Mes congés</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="add_leave.html" class="flex items-center p-3 text-white bg-orange-300 rounded-lg">
-                    <i class="fas fa-plus w-6"></i>
-                    <span class="ml-3 sidebar-text">Demande de congé</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="admin.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-cog w-6"></i>
-                    <span class="ml-3 sidebar-text">Administration</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="index.html" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-chart-bar w-6"></i>
-                    <span class="ml-3 sidebar-text">Tableau de bord</span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="p-5 border-t border-gray-200">
-            <a href="#" class="flex items-center p-3 text-gray-600 hover:bg-red-50 rounded-lg">
-                <i class="fas fa-sign-out-alt w-6"></i>
-                <span class="ml-3 sidebar-text">Déconnexion</span>
-            </a>
-        </div>
-    </nav>
-
-    <!-- Contenu principal -->
-    <main class="ml-64 p-6 transition-all duration-300" id="mainContent">
-        <h1 class="text-2xl font-bold">Bienvenue 👋</h1>
-        <p class="mt-2 text-gray-600">Ceci est le tableau de bord principal.</p>
-    </main>
-    <div class="w-full max-w-2xl">
-        <div class="bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
-                <i class="fas fa-bell text-yellow-500 mr-2"></i> Notifications importantes
-            </h2>
-            
-            <input type="radio" name="carousel" id="slide-1" class="hidden" checked>
-            <input type="radio" name="carousel" id="slide-2" class="hidden">
-            <input type="radio" name="carousel" id="slide-3" class="hidden">
-            
-            <div class="overflow-hidden relative">
-                <div class="flex transition-transform duration-500 ease-in-out w-[300%] translate-x-0"
-                     id="carousel">
-                    <!-- Notification 1 -->
-                    <div class="w-1/3 flex-shrink-0 pr-4">
-                        <div class="flex items-start">
-                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
-                            <div>
-                                <h3 class="font-semibold text-gray-800">Fermeture exceptionnelle</h3>
-                                <p class="text-gray-600 mt-1">Les bureaux seront fermés le 8 mars 2025 pour maintenance. Planifiez vos congés en conséquence.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Notification 2 -->
-                    <div class="w-1/3 flex-shrink-0 px-2">
-                        <div class="flex items-start">
-                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
-                            <div>
-                                <h3 class="font-semibold text-gray-800">Nouvelle politique de congés</h3>
-                                <p class="text-gray-600 mt-1">À partir du 1er janvier 2025, de nouvelles règles de congés seront en vigueur. Consultez les détails.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Notification 3 -->
-                    <div class="w-1/3 flex-shrink-0 pl-4">
-                        <div class="flex items-start">
-                            <input type="checkbox" class="mt-1 mr-4 h-5 w-5 text-blue-600">
-                            <div>
-                                <h3 class="font-semibold text-gray-800">Mise à jour du système</h3>
-                                <p class="text-gray-600 mt-1">Le système de gestion des congés sera indisponible le 15 décembre de 20h à 22h pour maintenance.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation du carrousel -->
-            <div class="flex justify-center mt-4 space-x-2">
-                <label for="slide-1" class="cursor-pointer w-3 h-3 rounded-full bg-blue-500 carousel-nav" onclick="showSlide(0)"></label>
-                <label for="slide-2" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(1)"></label>
-                <label for="slide-3" class="cursor-pointer w-3 h-3 rounded-full bg-gray-300 carousel-nav" onclick="showSlide(2)"></label>
-            </div>
-        </div>
     </div>
 
-
-
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Mes demandes de congé</h1>
-        
-        <!-- Statistiques -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-orange-200 p-4 rounded-lg shadow-sm">
-                <div class="flex items-center">
-                    <i class="fas fa-calendar-check text-orange-500 text-xl mr-2"></i>
-                    <div>
-                        <p class="text-sm text-gray-600">Congés restants</p>
-                        <p class="text-2xl font-bold">28 jours</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-green-100 p-4 rounded-lg shadow-sm">
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-green-600 text-xl mr-2"></i>
-                    <div>
-                        <p class="text-sm text-green-700">Approuvés</p>
-                        <p class="text-2xl font-bold">5</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-yellow-100 p-4 rounded-lg shadow-sm">
-                <div class="flex items-center">
-                    <i class="fas fa-clock text-yellow-600 text-xl mr-2"></i>
-                    <div>
-                        <p class="text-sm text-yellow-700">En attente</p>
-                        <p class="text-2xl font-bold">3</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-red-100 p-4 rounded-lg shadow-sm">
-                <div class="flex items-center">
-                    <i class="fas fa-times-circle text-red-600 text-xl mr-2"></i>
-                    <div>
-                        <p class="text-sm text-red-700">Refusés</p>
-                        <p class="text-2xl font-bold">1</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tableau des demandes -->
-        <div class="bg-white rounded-lg shadow-sm p-4">
-            <div class="table-container">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-50 text-gray-500 text-sm">
-                        <tr>
-                            <th class="p-3 font-medium">Demandé par</th>
-                            <th class="p-3 font-medium">Statut</th>
-                            <th class="p-3 font-medium">Durée</th>
-                            <th class="p-3 font-medium">Type</th>
-                            <th class="p-3 font-medium">Période</th>
-                            <th class="p-3 font-medium">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr>
-                            <td class="p-3">Pierre Martin</td>
-                            <td class="p-3">
-                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
-                                    Approuvé
-                                </span>
-                            </td>
-                            <td class="p-3">5 jours</td>
-                            <td class="p-3">Congés payés</td>
-                            <td class="p-3">12-17 Mars 2023</td>
-                            <td class="p-3">
-                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="1">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </button>
-                                <button class="text-red-500 hover:text-red-700">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Marie Dubois</td>
-                            <td class="p-3">
-                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">
-                                    En attente
-                                </span>
-                            </td>
-                            <td class="p-3">3 jours</td>
-                            <td class="p-3">RTT</td>
-                            <td class="p-3">20-23 Avril 2023</td>
-                            <td class="p-3">
-                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="2">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </button>
-                                <button class="text-red-500 hover:text-red-700">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">Jean Petit</td>
-                            <td class="p-3">
-                                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">
-                                    Refusé
-                                </span>
-                            </td>
-                            <td class="p-3">10 jours</td>
-                            <td class="p-3">Congés sans solde</td>
-                            <td class="p-3">5-15 Mai 2023</td>
-                            <td class="p-3">
-                                <button class="text-blue-500 hover:text-blue-700 mr-2 edit-btn" data-id="3">
-                                    <i class="fas fa-edit"></i> Modifier
-                                </button>
-                                <button class="text-red-500 hover:text-red-700">
-                                    <i class="fas fa-trash"></i> Supprimer
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0">
-            <div class="text-sm text-gray-500">
-                Affichage de 1 à 3 sur 10 demandes
-            </div>
-            <div class="flex items-center space-x-2">
-                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
-                    <i class="fas fa-chevron-left mr-2 text-xs"></i> Précédent
-                </button>
-                <div class="flex space-x-1">
-                    <button class="w-8 h-8 bg-orange-500 text-white rounded-lg">1</button>
-                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">2</button>
-                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">3</button>
-                    <span class="px-2 py-2">...</span>
-                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">5</button>
-                </div>
-                <button class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center">
-                    Suivant <i class="fas fa-chevron-right ml-2 text-xs"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal d'édition -->
-    <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none" id="editModal">
-        <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-        
-        <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
-            <div class="modal-content py-4 px-6">
-                <!-- En-tête du modal -->
-                <div class="flex justify-between items-center pb-3">
-                    <h3 class="text-xl font-bold text-gray-800">Modifier la demande de congé</h3>
-                    <button class="modal-close text-gray-500 hover:text-gray-700" id="closeModal">
+    <div class="container mx-auto px-4 py-8 lg:pt-12">
+        <div class="flex">
+            <!-- Sidebar avec statistiques et formulaire d'ajout -->
+            <div class="sidebar bg-white w-80 p-6 rounded-xl shadow-md lg:ml-0 fixed lg:static lg:translate-x-0 z-40 h-full lg:h-auto">
+                <div class="flex justify-between items-center mb-6 lg:mb-8">
+                    <h2 class="text-xl font-semibold text-gray-800">Mon Espace</h2>
+                    <button id="closeSidebar" class="text-gray-500 lg:hidden">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 
-                <!-- Corps du modal -->
-                <form id="leaveForm" class="space-y-4">
-                    <input type="hidden" id="leaveId" value="">
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
-                            <input type="date" id="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <!-- Profil utilisateur -->
+                <div class="flex items-center space-x-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="w-14 h-14 bg-orange-400 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                        AZ
+                    </div>
+                    <div>
+                        <p class="font-semibold">Albert Zitan</p>
+                        <p class="text-sm text-gray-600">Employé #1</p>
+                    </div>
+                </div>
+                
+                <!-- Carte des statistiques -->
+                <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-800">Mes Statistiques</h2>
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="p-3 bg-green-50 rounded-lg">
+                            <p class="text-2xl font-bold accepted text-green-600">1</p>
+                            <p class="text-xs text-green-800">Approuvés</p>
                         </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
-                            <input type="date" id="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        <div class="p-3 bg-yellow-50 rounded-lg">
+                            <p class="text-2xl font-bold pending text-yellow-600">2</p>
+                            <p class="text-xs text-yellow-800">En attente</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg">
+                            <p class="text-2xl font-bold refused text-red-600">1</p>
+                            <p class="text-xs text-red-800">Refusés</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Formulaire d'ajout de congé -->
+                <div class="bg-white rounded-xl shadow-md p-4 mb-6">
+                    <h2 class="text-lg font-semibold mb-4 text-gray-800">Nouvelle Demande</h2>
+                    <form id="add-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Type de congé</label>
+                            <select id="congeType" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                                <option value="">Sélectionner un type</option>
+                                <option value="Congé payé">Congé payé</option>
+                                <option value="Congé maladie">Congé maladie</option>
+                                <option value="Sans solde">Sans solde</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Date de début</label>
+                            <input type="date" id="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Date de fin</label>
+                            <input type="date" id="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Justification</label>
+                            <textarea id="justification" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300">
+                            Soumettre la demande
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="flex-1 lg:ml-6">
+                <!-- Header avec barre de recherche et notifications -->
+                <div class="bg-white rounded-xl shadow-md p-4 lg:p-6 mb-6">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
+                        <h2 class="text-xl font-semibold text-gray-800">Gestion des Congés</h2>
+                        
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 w-full lg:w-auto">
+                            <!-- Barre de recherche -->
+                            <div class="relative w-full lg:w-64">
+                                <input type="text" id="searchInput" placeholder="Rechercher un congé..." class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            
+                            <!-- Bouton notifications (desktop) -->
+                            <div class="hidden lg:block relative">
+                                <button id="notificationButtonDesktop" class="text-gray-600 relative p-2">
+                                    <i class="fas fa-bell text-xl"></i>
+                                    <span class="notification-dot">3</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenu principal avec liste des congés -->
+                <div class="bg-white rounded-xl shadow-md p-4 lg:p-6 mb-6">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-2 lg:space-y-0">
+                        <h2 class="text-xl font-semibold text-gray-800">Mes Demandes de Congé</h2>
+                        
+                        <!-- Filtres -->
+                        <div class="flex space-x-2">
+                            <select id="filterStatus" class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="">Tous les statuts</option>
+                                <option value="approuvé">Approuvé</option>
+                                <option value="en attente">En attente</option>
+                                <option value="refusé">Refusé</option>
+                            </select>
+                            <select id="filterPeriod" class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <option value="">Toutes périodes</option>
+                                <option value="month">Ce mois</option>
+                                <option value="quarter">Ce trimestre</option>
+                                <option value="year">Cette année</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left border-b border-gray-200">
+                                    <th class="p-3">Type</th>
+                                    <th class="p-3">Statut</th>
+                                    <th class="p-3">Durée</th>
+                                    <th class="p-3">Période</th>
+                                    <th class="p-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="show">
+                                <!-- Les données seront insérées ici par JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section pour tous les congés (vue administrateur) -->
+                <div class="bg-white rounded-xl shadow-md p-4 lg:p-6">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Tous les Congés</h2>
+                    
+                    <div class="flex border-b border-gray-200 mb-4">
+                        <button class="tab-button px-4 py-2 text-sm font-medium tab-active" data-tab="all">
+                            Tous les congés
+                        </button>
+                        <button class="tab-button px-4 py-2 text-sm font-medium" data-tab="pending">
+                            En attente
+                        </button>
+                    </div>
+                    
+                    <div id="leaves" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Les cartes de congés seront insérées ici par JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour modifier un congé -->
+    <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="bg-white rounded-xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 max-h-90vh overflow-y-auto z-50 transform scale-95 transition-transform duration-300">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Modifier le congé</h3>
+                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="congeForm" class="space-y-4">
+                    <input type="hidden" name="congeId">
                     
                     <div>
-                        <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
-                        <select id="leaveType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                            <option value="paid">Congés payés</option>
-                            <option value="rtt">RTT</option>
-                            <option value="sick">Congés maladie</option>
-                            <option value="unpaid">Congés sans solde</option>
-                            <option value="parental">Congés maternité/paternité</option>
-                            <option value="other">Autre</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Type de congé</label>
+                        <select name="congeType" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                            <option value="Congé payé">Congé payé</option>
+                            <option value="Congé maladie">Congé maladie</option>
+                            <option value="Sans solde">Sans solde</option>
                         </select>
                     </div>
                     
                     <div>
-                        <label class="block text-gray-700 mb-2 font-medium">Justification</label>
-                        <textarea id="justification" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Expliquez la raison de votre demande"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Date de début</label>
+                        <input type="date" name="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
                     </div>
                     
-                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
-                        <h4 class="text-lg font-semibold text-orange-800 mb-2 flex items-center">
-                            <i class="fas fa-info-circle mr-2"></i> Information importante
-                        </h4>
-                        <p class="text-orange-700">
-                            Toute modification sera soumise à l'approbation de votre manager. Les congés déjà approuvés pourraient nécessiter une nouvelle validation.
-                        </p>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Date de fin</label>
+                        <input type="date" name="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Justification</label>
+                        <textarea name="justification" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" required></textarea>
                     </div>
                     
                     <div class="flex justify-end space-x-3 pt-4">
-                        <button type="button" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors" id="cancelEdit">
+                        <button type="button" id="cancelEdit" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
                             Annuler
                         </button>
-                        <button type="submit" class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
-                            Enregistrer les modifications
+                        <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                            Enregistrer
                         </button>
                     </div>
                 </form>
@@ -374,183 +296,573 @@
         </div>
     </div>
 
+    <!-- Panel des notifications -->
+    <div id="notificationPanel" class="fixed top-16 right-4 w-80 bg-white rounded-xl shadow-2xl z-50 transform scale-95 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="p-4 border-b border-gray-200">
+            <h3 class="font-semibold text-gray-800">Notifications</h3>
+        </div>
+        <div class="max-h-96 overflow-y-auto">
+           
+          
+          
+        </div>
+       
+    </div>
+
     <script>
-        // Données de démonstration pour les demandes de congé
-        const leaveRequests = {
-            1: {
-                employee: "Pierre Martin",
-                startDate: "2023-03-12",
-                endDate: "2023-03-17",
-                type: "paid",
-                justification: "Vacances en famille à la montagne",
-                status: "approved"
+        // Données simulées (normalement récupérées depuis json-server)
+        const congesData = {
+          "conges": [
+            {
+              "id_employee": 1,
+              "nom_employee": "Albert",
+              "prenom_employee": "Zitan",
+              "conges": [
+                {
+                  "id_conge": 1,
+                  "type_conge": "Congé payé",
+                  "status_conge": "en attente",
+                  "justification": "Voyage familial",
+                  "date_debut": "2025-01-22",
+                  "date_fin": "2025-01-25",
+                  "duree": 4
+                },
+                {
+                  "id_conge": 2,
+                  "type_conge": "Congé maladie",
+                  "status_conge": "approuvé",
+                  "justification": "Fièvre",
+                  "date_debut": "2025-02-10",
+                  "date_fin": "2025-02-12",
+                  "duree": 3
+                },
+                {
+                  "id_conge": 3,
+                  "type_conge": "Sans solde",
+                  "status_conge": "refusé",
+                  "justification": "Non justifié",
+                  "date_debut": "2025-03-05",
+                  "date_fin": "2025-03-06",
+                  "duree": 2
+                },
+                {
+                  "id_conge": 4,
+                  "type_conge": "Congé payé",
+                  "status_conge": "approuvé",
+                  "justification": "Mariage",
+                  "date_debut": "2025-04-15",
+                  "date_fin": "2025-04-20",
+                  "duree": 6
+                },
+                {
+                  "id_conge": 5,
+                  "type_conge": "Congé payé",
+                  "status_conge": "en attente",
+                  "justification": "Voyage scolaire",
+                  "date_debut": "2025-05-02",
+                  "date_fin": "2025-05-03",
+                  "duree": 2
+                }
+              ],
+              "notifications": [
+                {
+                  "id_notif": 1,
+                  "message": "Votre demande de congé du 22/01/2025 est en attente.",
+                  "status": "non_lu"
+                },
+                {
+                  "id_notif": 2,
+                  "message": "Votre congé maladie du 10/02/2025 a été approuvé.",
+                  "status": "lu"
+                }
+              ]
             },
-            2: {
-                employee: "Marie Dubois",
-                startDate: "2023-04-20",
-                endDate: "2023-04-23",
-                type: "rtt",
-                justification: "Réduction du temps de travail",
-                status: "pending"
-            },
-            3: {
-                employee: "Jean Petit",
-                startDate: "2023-05-05",
-                endDate: "2023-05-15",
-                type: "unpaid",
-                justification: "Voyage à l'étranger",
-                status: "refused"
+            {
+              "id_employee": 2,
+              "nom_employee": "Dupont",
+              "prenom_employee": "Marie",
+              "conges": [
+                {
+                  "id_conge": 6,
+                  "type_conge": "Congé payé",
+                  "status_conge": "en attente",
+                  "justification": "Vacances",
+                  "date_debut": "2025-05-12",
+                  "date_fin": "2025-05-15",
+                  "duree": 4
+                }
+              ],
+              "notifications": []
+            }
+          ]
+        };
+
+        const connected_user = 1;
+        let allCongesData = [];
+
+        // Fonction pour afficher les congés de l'utilisateur
+        const afficheUserConges = async (id) => {
+            try {
+                // Simulation de la récupération des données
+                let userConges = congesData.conges.filter(conge => conge.id_employee === id);
+                
+                const tableBody = document.querySelector(".show");
+                tableBody.innerHTML = ``;
+
+                userConges.forEach(element => {
+                    element.conges.forEach(conge => {
+                        const row = document.createElement("tr");
+                        row.setAttribute("data-id", conge.id_conge);
+                        row.classList.add("border-b", "border-gray-100");
+
+                        row.innerHTML = `
+                            <td class="p-3">${conge.type_conge}</td>
+                            <td class="p-3">
+                                ${
+                                    conge.status_conge === "approuvé"
+                                        ? `<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                            <i class="fas fa-check mr-1"></i> Approuvé</span>`
+                                        : conge.status_conge === "refusé"
+                                            ? `<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">
+                                                <i class="fas fa-times mr-1"></i> Refusé</span>`
+                                            : `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                                <i class="fas fa-clock mr-1"></i> En attente</span>`
+                                }
+                            </td>
+                            <td class="p-3">${conge.duree} jours</td>
+                            <td class="p-3">${conge.date_debut} au ${conge.date_fin}</td>
+                            <td class="p-3">
+                                <button class="edit text-blue-500 hover:text-blue-700 mr-2" onClick="editConge(${conge.id_conge})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="delete text-red-500 hover:text-red-700" onClick="deleteConge(${conge.id_conge})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        `;
+
+                        tableBody.appendChild(row);
+                    });
+                });
+
+                // Calcul des totaux
+                let allConges = userConges.flatMap(e => e.conges);
+                let refused = allConges.filter(cg => cg.status_conge === "refusé").length;
+                let accepted = allConges.filter(cg => cg.status_conge === "approuvé").length;
+                let pending = allConges.filter(cg => cg.status_conge === "en attente").length;
+
+                document.querySelector(".refused").textContent = refused;
+                document.querySelector(".accepted").textContent = accepted;
+                document.querySelector(".pending").textContent = pending;
+
+                // Stocker les données pour les filtres
+                allCongesData = allConges;
+
+            } catch (error) {
+                console.error("Erreur lors du chargement des congés:", error);
             }
         };
 
-        // Éléments du DOM
-        const modal = document.getElementById('editModal');
+        // Fonction pour modifier un congé
+        const editConge = async (congeId) => {
+            modalOpen();
+            try {
+                // Simulation de la récupération des données
+                const employee = congesData.conges.find(e => e.id_employee === connected_user);
+
+                if (!employee) {
+                    console.error("Employé introuvable !");
+                    return;
+                }
+
+                // Recherche du congé par son id
+                const conge = employee.conges.find(c => c.id_conge === congeId);
+
+                if (!conge) {
+                    console.error("Congé introuvable !");
+                    return;
+                }
+
+                // Remplir le formulaire modal
+                congeForm.congeId.value = congeId;
+                congeForm.startDate.value = conge.date_debut;
+                congeForm.endDate.value = conge.date_fin;
+                congeForm.congeType.value = conge.type_conge;
+                congeForm.justification.value = conge.justification;
+
+            } catch (error) {
+                console.error("Erreur lors de la modification:", error);
+            }
+        };
+
+        // Fonction pour supprimer un congé
+        const deleteConge = async (congeId) => {
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce congé ?")) {
+                try {
+                    // Simulation de suppression
+                    const employee = congesData.conges.find(e => e.id_employee === connected_user);
+                    if (employee) {
+                        employee.conges = employee.conges.filter(c => c.id_conge !== congeId);
+                    }
+                    
+                    alert("✅ Congé supprimé avec succès !");
+                    afficheUserConges(connected_user); // Actualiser le tableau
+                } catch (error) {
+                    console.error("Erreur lors de la suppression:", error);
+                }
+            }
+        };
+
+        // Fonction pour afficher tous les congés (vue administrateur)
+        const afficherAllConges = async () => {
+            try {
+                // Simulation de la récupération des données
+                const data = congesData;
+                
+                const cardsContainer = document.querySelector('#leaves');
+                cardsContainer.innerHTML = '';
+
+                data.conges.forEach(element => {
+                    element.conges.forEach(conge => {
+                        let card = document.createElement('div');
+                        card.classList.add('card-hover');
+                        card.innerHTML = `
+                            <div class="p-3 md:p-4 rounded shadow-md border border-gray-100">
+                                ${conge.status_conge === "approuvé" 
+                                    ? `<span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs float-right status-badge">
+                                        <i class="fas fa-check text-green-600 text-xs mr-1"></i> Approuvé</span>` 
+                                    : conge.status_conge === "refusé" 
+                                        ? `<span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs float-right status-badge"> 
+                                            <i class="fas fa-times mr-1"></i> Refusé</span>` 
+                                        : `<span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs float-right status-badge">
+                                            <i class="fas fa-clock mr-1"></i> En attente</span>`
+                                }
+                                <p class="font-semibold text-sm md:text-base">${element.prenom_employee} ${element.nom_employee}</p>
+                                <p class="mb-2 text-xs md:text-sm text-gray-600">Data Analyste</p>
+                                <p class="text-xs md:text-sm text-gray-600">Type: <span class="float-right font-bold">${conge.type_conge}</span></p>
+                                <p class="text-xs md:text-sm text-gray-600">Du: <span class="float-right font-bold">${conge.date_debut}</span></p>
+                                <p class="text-xs md:text-sm text-gray-600">Au: <span class="float-right font-bold">${conge.date_fin}</span></p>
+                                <p class="text-xs md:text-sm text-gray-600 mb-3">Durée: <span class="float-right font-bold">${conge.duree} jours</span></p>
+                                <div class="flex space-x-2">
+                                    <button onclick="approveConge(${conge.id_conge}, ${element.id_employee})" class="approve-btn bg-green-500 px-3 py-1 rounded text-white text-xs md:text-sm hover:bg-green-600 transition ${conge.status_conge !== 'en attente' ? 'opacity-50 cursor-not-allowed' : ''}" ${conge.status_conge !== 'en attente' ? 'disabled' : ''}>
+                                        Approuver
+                                    </button>
+                                    <button onclick="rejectConge(${conge.id_conge}, ${element.id_employee})" class="reject-btn bg-red-500 px-3 py-1 rounded text-white text-xs md:text-sm hover:bg-red-600 transition ${conge.status_conge !== 'en attente' ? 'opacity-50 cursor-not-allowed' : ''}" ${conge.status_conge !== 'en attente' ? 'disabled' : ''}>
+                                        Refuser
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        cardsContainer.appendChild(card);
+                    });
+                });
+            } catch (error) {
+                console.error("Erreur lors du chargement de tous les congés:", error);
+            }
+        };
+
+        // Fonction pour approuver un congé
+        const approveConge = async (congeId, employeeId) => {
+            try {
+                // Simulation de mise à jour
+                const employee = congesData.conges.find(e => e.id_employee === employeeId);
+                if (employee) {
+                    const conge = employee.conges.find(c => c.id_conge === congeId);
+                    if (conge) {
+                        conge.status_conge = "approuvé";
+                        
+                        // Ajouter une notification
+                        employee.notifications.push({
+                            id_notif: Date.now(),
+                            message: `Votre congé (${conge.date_debut} au ${conge.date_fin}) a été approuvé.`,
+                            status: "non_lu"
+                        });
+                    }
+                }
+                
+                alert("✅ Congé approuvé avec succès !");
+                afficherAllConges(); // Actualiser l'affichage
+            } catch (error) {
+                console.error("Erreur lors de l'approbation:", error);
+            }
+        };
+
+        // Fonction pour refuser un congé
+        const rejectConge = async (congeId, employeeId) => {
+            try {
+                // Simulation de mise à jour
+                const employee = congesData.conges.find(e => e.id_employee === employeeId);
+                if (employee) {
+                    const conge = employee.conges.find(c => c.id_conge === congeId);
+                    if (conge) {
+                        conge.status_conge = "refusé";
+                        
+                        // Ajouter une notification
+                        employee.notifications.push({
+                            id_notif: Date.now(),
+                            message: `Votre congé (${conge.date_debut} au ${conge.date_fin}) a été refusé.`,
+                            status: "non_lu"
+                        });
+                    }
+                }
+                
+                alert("✅ Congé refusé avec succès !");
+                afficherAllConges(); // Actualiser l'affichage
+            } catch (error) {
+                console.error("Erreur lors du refus:", error);
+            }
+        };
+
+        // Fonctions pour gérer le modal
+        const modal = document.querySelector('.modal');
         const closeModalBtn = document.getElementById('closeModal');
         const cancelEditBtn = document.getElementById('cancelEdit');
-        const editButtons = document.querySelectorAll('.edit-btn');
-        const leaveForm = document.getElementById('leaveForm');
 
-        // Ouvrir le modal avec les données
-        editButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const leaveId = button.getAttribute('data-id');
-                const leaveData = leaveRequests[leaveId];
-                
-                if (leaveData) {
-                    document.getElementById('leaveId').value = leaveId;
-                    document.getElementById('startDate').value = leaveData.startDate;
-                    document.getElementById('endDate').value = leaveData.endDate;
-                    document.getElementById('leaveType').value = leaveData.type;
-                    document.getElementById('justification').value = leaveData.justification;
-                    
-                    openModal();
-                }
-            });
-        });
-
-        // Ouvrir le modal
-        function openModal() {
+        function modalOpen() {
             modal.classList.remove('opacity-0');
             modal.classList.remove('pointer-events-none');
-            document.querySelector('.modal-container').classList.add('modal-active');
-            document.body.style.overflow = 'hidden'; // Empêcher le défilement
+            document.body.style.overflow = 'hidden';
         }
 
-        // Fermer le modal
-        function closeModal() {
+        function modalClose() {
             modal.classList.add('opacity-0');
             modal.classList.add('pointer-events-none');
-            document.querySelector('.modal-container').classList.remove('modal-active');
-            document.body.style.overflow = 'auto'; // Permettre le défilement
+            document.body.style.overflow = 'auto';
         }
 
-        // Événements pour fermer le modal
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelEditBtn.addEventListener('click', closeModal);
-        
-        // Fermer en cliquant à l'extérieur du modal
-        modal.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal();
-            }
-        });
-
-        // Soumission du formulaire
-        leaveForm.addEventListener('submit', (e) => {
+        // Gestionnaire d'événements pour le formulaire de modification
+        congeForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Récupérer les valeurs du formulaire
-            const leaveId = document.getElementById('leaveId').value;
-            const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
-            const leaveType = document.getElementById('leaveType').value;
-            const justification = document.getElementById('justification').value;
-            
-            // Ici, vous enverriez normalement les données au serveur
-            console.log('Données à envoyer:', {
-                id: leaveId,
-                startDate,
-                endDate,
-                leaveType,
-                justification
-            });
-            
-            // Simulation de sauvegarde réussie
-            alert('Modifications enregistrées avec succès!');
-            closeModal();
+
+            const updatedConge = {
+                date_debut: congeForm.startDate.value,
+                date_fin: congeForm.endDate.value,
+                type_conge: congeForm.congeType.value,
+                justification: congeForm.justification.value,
+            };
+
+            try {
+                // Simulation de mise à jour
+                const employee = congesData.conges.find(e => e.id_employee === connected_user);
+                if (employee) {
+                    const conge = employee.conges.find(c => c.id_conge === parseInt(congeForm.congeId.value));
+                    if (conge) {
+                        Object.assign(conge, updatedConge);
+                        // Recalculer la durée
+                        const start = new Date(updatedConge.date_debut);
+                        const end = new Date(updatedConge.date_fin);
+                        const diffTime = Math.abs(end - start);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                        conge.duree = diffDays;
+                    }
+                }
+                
+                alert("✅ Congé mis à jour avec succès !");
+                modalClose();
+                afficheUserConges(connected_user); // Actualiser le tableau
+            } catch (err) {
+                console.error("Erreur lors de la mise à jour", err);
+            }
         });
 
-        // Calcul automatique de la durée
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
-        
-        function calculateDuration() {
-            if (startDateInput.value && endDateInput.value) {
-                const start = new Date(startDateInput.value);
-                const end = new Date(endDateInput.value);
-                const diffTime = Math.abs(end - start);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-                
-                // Vous pourriez afficher cette durée quelque part
-                console.log(`Durée: ${diffDays} jours`);
-            }
-        }
-        
-        startDateInput.addEventListener('change', calculateDuration);
-        endDateInput.addEventListener('change', calculateDuration);
-   
+        // Gestionnaire d'événements pour le formulaire d'ajout
+        const addForm = document.getElementById('add-form');
+        addForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-        function showSlide(index) {
-            const carousel = document.getElementById('carousel');
-            const translateValue = -index * 33.3333;
-            carousel.style.transform = `translateX(${translateValue}%)`;
+            const startDate = document.getElementById("startDate").value;
+            const endDate = document.getElementById("endDate").value;
+            const congeType = document.getElementById("congeType").value;
+            const justification = document.getElementById("justification").value;
+
+            // Calcul de la durée
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const diffTime = Math.abs(end - start);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+            const newConge = {
+                id_conge: Date.now(),   // Identifiant unique
+                date_debut: startDate,
+                date_fin: endDate,
+                type_conge: congeType,
+                justification: justification,
+                status_conge: "en attente",
+                duree: diffDays
+            };
+
+            try {
+                // Simulation d'ajout
+                const employee = congesData.conges.find(e => e.id_employee === connected_user);
+                if (employee) {
+                    employee.conges.push(newConge);
+                }
+                
+                addForm.reset();
+                afficheUserConges(connected_user); // Actualiser le tableau
+                alert("✅ Congé ajouté avec succès !");
+            } catch (error) {
+                console.error("Erreur lors de l'ajout:", error);
+            }
+        });
+
+        // Fonctions de filtrage
+        document.getElementById('filterStatus').addEventListener('change', function() {
+            filterConges();
+        });
+
+        document.getElementById('filterPeriod').addEventListener('change', function() {
+            filterConges();
+        });
+
+        function filterConges() {
+            const statusFilter = document.getElementById('filterStatus').value;
+            const periodFilter = document.getElementById('filterPeriod').value;
             
-            // Mettre à jour la navigation
-            const navDots = document.querySelectorAll('.carousel-nav');
-            navDots.forEach((dot, i) => {
-                if (i === index) {
-                    dot.classList.remove('bg-gray-300');
-                    dot.classList.add('bg-blue-500');
+            const rows = document.querySelectorAll('.show tr');
+            
+            rows.forEach(row => {
+                let showRow = true;
+                const status = row.querySelector('td:nth-child(2) span').textContent.trim().toLowerCase();
+                const dateText = row.querySelector('td:nth-child(4)').textContent;
+                const startDate = new Date(dateText.split(' au ')[0]);
+                
+                // Filtre par statut
+                if (statusFilter && !status.includes(statusFilter)) {
+                    showRow = false;
+                }
+                
+                // Filtre par période
+                if (periodFilter && showRow) {
+                    const now = new Date();
+                    let startPeriod = new Date();
+                    
+                    switch(periodFilter) {
+                        case 'month':
+                            startPeriod.setMonth(now.getMonth());
+                            startPeriod.setDate(1);
+                            break;
+                        case 'quarter':
+                            const currentQuarter = Math.floor(now.getMonth() / 3);
+                            startPeriod.setMonth(currentQuarter * 3);
+                            startPeriod.setDate(1);
+                            break;
+                        case 'year':
+                            startPeriod.setFullYear(now.getFullYear());
+                            startPeriod.setMonth(0);
+                            startPeriod.setDate(1);
+                            break;
+                    }
+                    
+                    if (startDate < startPeriod) {
+                        showRow = false;
+                    }
+                }
+                
+                row.style.display = showRow ? '' : 'none';
+            });
+        }
+
+        // Barre de recherche
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchText = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.show tr');
+            
+            rows.forEach(row => {
+                const type = row.querySelector('td:first-child').textContent.toLowerCase();
+                const status = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const duration = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const period = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                
+                if (type.includes(searchText) || status.includes(searchText) || 
+                    duration.includes(searchText) || period.includes(searchText)) {
+                    row.style.display = '';
                 } else {
-                    dot.classList.remove('bg-blue-500');
-                    dot.classList.add('bg-gray-300');
+                    row.style.display = 'none';
                 }
             });
+        });
+
+        // Gestion des onglets
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('tab-active');
+                });
+                this.classList.add('tab-active');
+                
+                // Filtrer les congés selon l'onglet sélectionné
+                const tab = this.getAttribute('data-tab');
+                const cards = document.querySelectorAll('#leaves > div');
+                
+                cards.forEach(card => {
+                    if (tab === 'all') {
+                        card.style.display = '';
+                    } else if (tab === 'pending') {
+                        const status = card.querySelector('.status-badge').textContent.trim().toLowerCase();
+                        if (status.includes('en attente')) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Gestion des notifications
+        const notificationPanel = document.getElementById('notificationPanel');
+        const notificationButton = document.getElementById('notificationButton');
+        const notificationButtonDesktop = document.getElementById('notificationButtonDesktop');
+        
+        function toggleNotifications() {
+            notificationPanel.classList.toggle('opacity-0');
+            notificationPanel.classList.toggle('pointer-events-none');
+            notificationPanel.classList.toggle('scale-95');
+            notificationPanel.classList.toggle('scale-100');
         }
-
-            const sidebar = document.getElementById("sidebar");
-        const mainContent = document.getElementById("mainContent");
-        const toggleBtn = document.getElementById("toggleBtn");
-        const sidebarTexts = document.querySelectorAll(".sidebar-text");
-        const sidebarTitle = document.getElementById("sidebarTitle");
-        const userName = document.getElementById("userName");
-        const userRole = document.getElementById("userRole");
-
-        let isCollapsed = false;
-
-        toggleBtn.addEventListener("click", () => {
-            isCollapsed = !isCollapsed;
-
-            if (isCollapsed) {
-                sidebar.classList.replace("w-64", "w-20");
-                mainContent.classList.replace("ml-64", "ml-20");
-                sidebarTexts.forEach(el => el.classList.add("hidden"));
-                sidebarTitle.classList.add("hidden");
-                userName.classList.add("hidden");
-                userRole.classList.add("hidden");
-                toggleBtn.innerHTML = `<i class="fas fa-angle-right"></i>`;
-            } else {
-                sidebar.classList.replace("w-20", "w-64");
-                mainContent.classList.replace("ml-20", "ml-64");
-                sidebarTexts.forEach(el => el.classList.remove("hidden"));
-                sidebarTitle.classList.remove("hidden");
-                userName.classList.remove("hidden");
-                userRole.classList.remove("hidden");
-                toggleBtn.innerHTML = `<i class="fas fa-angle-left"></i>`;
+        
+        notificationButton.addEventListener('click', toggleNotifications);
+        notificationButtonDesktop.addEventListener('click', toggleNotifications);
+        
+        // Fermer le panel de notifications en cliquant à l'extérieur
+        document.addEventListener('click', (e) => {
+            if (!notificationPanel.contains(e.target) && 
+                e.target !== notificationButton && 
+                e.target !== notificationButtonDesktop &&
+                !notificationButton.contains(e.target)) {
+                notificationPanel.classList.add('opacity-0');
+                notificationPanel.classList.add('pointer-events-none');
+                notificationPanel.classList.add('scale-95');
+                notificationPanel.classList.remove('scale-100');
             }
         });
 
-    </script>
+        // Gestion du menu mobile
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const sidebar = document.querySelector('.sidebar');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.add('open');
+        });
+        
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
 
+        // Événements de fermeture du modal
+        closeModalBtn.addEventListener('click', modalClose);
+        cancelEditBtn.addEventListener('click', modalClose);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modalClose();
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            afficheUserConges(connected_user);
+            afficherAllConges();
+        });
+    </script>
 </body>
 </html>

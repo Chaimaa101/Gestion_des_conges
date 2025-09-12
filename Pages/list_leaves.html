@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../Style/style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
@@ -20,8 +21,8 @@
         <div class="statistic grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div class="card bg-orange-200 p-4 rounded-lg shadow-sm">
                 <i class="fas fa-calendar-check text-orange-500 text-xl mb-2"></i>
-                <p class="text-sm text-gray-500">Congés restants</p>
-                <p class="text-2xl font-bold">28 jours</p>
+                <p class="text-sm text-gray-500">Solde congé</p>
+                <p class="solde text-2xl font-bold"> </p>
             </div>
             <div class="card bg-green-100 p-4 rounded-lg shadow-sm ">
                 <i class="fas fa-check-circle text-green-800 text-xl mb-2"></i>
@@ -42,86 +43,131 @@
 
         <div class="data bg-white rounded-lg shadow-sm p-4">
             <table class="w-full text-left overflow-x ">
+
+                <div class="flex space-x-2 border-b border-gray-200 mb-4">
+                    <button
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent tab-active"
+                        data-tab="all">
+                        Tous
+                    </button>
+                    <button
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition"
+                        data-tab="pending">
+                        En attente
+                    </button>
+                    <button
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition"
+                        data-tab="approved">
+                        Approuvés
+                    </button>
+                    <button
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition"
+                        data-tab="refused">
+                        Refusés
+                    </button>
+                </div>
+
                 <thead class="bg-gray-50 text-gray-500 text-sm">
                     <tr>
                         <th class="p-3">Demandé par</th>
                         <th class="p-3">Statut</th>
                         <th class="p-3">Durée</th>
                         <th class="p-3">Type</th>
-                        <th class="p-3 " >Actions</th>
+                        <th class="p-3 ">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="show divide-y divide-gray-200">
-                   <!---- data here-->
+                    <!---- data here-->
                 </tbody>
             </table>
 
         </div>
-        <div class="flex justify-end space-x-3 mt-4">
-  <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg 
-                 hover:bg-gray-300 transition duration-300 ease-in-out">
-    Previous
-  </button>
-            <span class="text-gray-500 font-bold mt-2">1/5</span>
+        <div class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0">
+            <div class="text-sm text-gray-500">
+                Affichage de 1 à 3 sur 10 demandes
+            </div>
+            <div class="flex items-center space-x-2">
+                <button
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                    <i class="fas fa-chevron-left mr-2 text-xs"></i> Précédent
+                </button>
+                <div class="flex space-x-1">
+                    <button class="w-8 h-8 bg-orange-500 text-white rounded-lg">1</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">2</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">3</button>
+                    <span class="px-2 py-2">...</span>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">5</button>
+                </div>
+                <button
+                    class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center">
+                    Suivant <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                </button>
+            </div>
+        </div>
+        </div>
 
-  
-  <button class="px-4 py-2 bg-orange-500 text-white rounded-lg 
-                 hover:bg-orange-600 transition duration-300 ease-in-out">
-    Next
-  </button>
-</div>
     </main>
-    
- <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none" id="editModal">
+
+    <div class="modal fixed inset-0 w-full h-full flex items-center justify-center z-50 opacity-0 pointer-events-none"
+        id="editModal">
         <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-        
+
         <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
             <div class="modal-content py-4 px-6">
 
                 <div class="flex justify-between items-center pb-3">
                     <h3 class="text-xl font-bold text-gray-800">Modifier la demande de congé</h3>
-                    <button class="closeModal modal-close text-gray-500 hover:text-gray-700" id="closeModal" onclick=modalClose()>
+                    <button class="closeModal modal-close text-gray-500 hover:text-gray-700" id="closeModal"
+                        onclick=modalClose()>
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                
+
                 <!-- Corps du modal -->
                 <form id="congeForm" class="space-y-4">
-                    <input type="hidden" id="congeId" value="">
-                    
+                    <input type="hidden" id="congeId" name="congeId" value="">
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-700 mb-2 font-medium">Date de début</label>
-                            <input type="date" id="startDate" name="startDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="date" id="startDate" name="startDate"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                         </div>
                         <div>
                             <label class="block text-gray-700 mb-2 font-medium">Date de fin</label>
-                            <input type="date" id="endDate" name="endDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <input type="date" id="endDate" name="endDate"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                         </div>
                     </div>
-                    
+
                     <div>
                         <label class="block text-gray-700 mb-2 font-medium">Type de congé</label>
-                        <select id="congeType" name="congeType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                            <option value="paid">Congés payés</option>
-                            <option value="rtt">RTT</option>
-                            <option value="sick">Congés maladie</option>
-                            <option value="unpaid">Congés sans solde</option>
-                            <option value="parental">Congés maternité/paternité</option>
-                            <option value="other">Autre</option>
+                        <select id="congeType" name="congeType"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="Congés payés">Congés payés</option>
+                            <option value="RTT">RTT</option>
+                            <option value="Congés maladie">Congés maladie</option>
+                            <option value="Sans solde">Congés sans solde</option>
+                            <option value="Congés maternité ">Congés maternité/paternité</option>
+                            <option value="Autre">Autre</option>
                         </select>
                     </div>
-                    
+
                     <div>
                         <label class="block text-gray-700 mb-2 font-medium">Justification</label>
-                        <textarea id="justification" name="justification" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Expliquez la raison de votre demande"></textarea>
+                        <textarea id="justification" name="justification" rows="4"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            placeholder="Expliquez la raison de votre demande"></textarea>
                     </div>
-                    
+
                     <div class="flex justify-end space-x-3 pt-4">
-                        <button type="button" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors" onclick="modalClose()">
+                        <button type="button"
+                            class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                            onclick="modalClose()">
                             Annuler
                         </button>
-                        <button type="submit" class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
+                        <button type="submit"
+                            class="px-6 py-2 bg-orange-500 text-white rounded-lg font-medium hover:bg-orange-600 transition-colors">
                             Enregistrer les modifications
                         </button>
                     </div>
@@ -129,10 +175,39 @@
             </div>
         </div>
     </div>
+    <script src="../Script/script.js" defer></script>
+    <script>
 
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function () {
+                // Retirer l'état actif de tous les onglets
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('tab-active');
+                });
+                this.classList.add('tab-active');
 
-    
-<script src="../Script/script.js"></script>
+                // Filtrer selon l'onglet
+                const tab = this.getAttribute('data-tab');
+                const rows = document.querySelectorAll('.show > tr'); // <-- tr, pas td
+
+                rows.forEach(row => {
+                    const status = row.querySelector('.status-badge').textContent.trim().toLowerCase();
+
+                    if (tab === 'all') {
+                        row.style.display = '';
+                    } else if (tab === 'pending') {
+                        row.style.display = status.includes('en attente') ? '' : 'none';
+                    } else if (tab === 'approved') {
+                        row.style.display = status.includes('approuvé') ? '' : 'none';
+                    } else if (tab === 'refused') {
+                        row.style.display = status.includes('refusé') ? '' : 'none';
+                    }
+                });
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>

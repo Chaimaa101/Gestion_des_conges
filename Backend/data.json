@@ -1,371 +1,167 @@
 {
+  "employees": [
+    {
+      "id": "1",
+      "nom": "Albert",
+      "prenom": "Zitan",
+      "poste": "Data Analyste",
+      "email": "albert.zitan@entreprise.com",
+      "solde_conge": "40"
+    },
+    {
+      "id": "2",
+      "nom": "Dupont",
+      "prenom": "Marie",
+      "poste": "Développeuse",
+      "email": "marie.dupont@entreprise.com",
+      "solde_conge": "20"
+    },
+    {
+      "id": "3",
+      "nom": "DCD",
+      "prenom": "MaEFCVDFVrie",
+      "poste": "Développeuse",
+      "email": "marie.dupont@entreprise.com",
+      "solde_conge": "30"
+    }
+  ],
   "conges": [
     {
+      "id": "6",
       "id_employee": 1,
-      "nom_employee": "Albert",
-      "prenom_employee": "Zitan",
-      "conges": [
-        {
-          "id_conge": 1,
-          "type_conge": "Congé payé",
-          "status_conge": "en attente",
-          "justification": "Voyage familial",
-          "date_debut": "2025-01-22",
-          "date_fin": "2025-01-25",
-          "duree": 4
-        },
-        {
-          "id_conge": 2,
-          "type_conge": "Congé maladie",
-          "status_conge": "approuvé",
-          "justification": "Fièvre",
-          "date_debut": "2025-02-10",
-          "date_fin": "2025-02-12",
-          "duree": 3
-        },
-        {
-          "id_conge": 3,
-          "type_conge": "Sans solde",
-          "status_conge": "refusé",
-          "justification": "Non justifié",
-          "date_debut": "2025-03-05",
-          "date_fin": "2025-03-06",
-          "duree": 2
-        },
-        {
-          "id_conge": 4,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Mariage",
-          "date_debut": "2025-04-15",
-          "date_fin": "2025-04-20",
-          "duree": 6
-        },
-        {
-          "id_conge": 5,
-          "type_conge": "Congé payé",
-          "status_conge": "en attente",
-          "justification": "Voyage scolaire",
-          "date_debut": "2025-05-02",
-          "date_fin": "2025-05-03",
-          "duree": 2
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 1,
-          "message": "Votre demande de congé du 22/01/2025 est en attente.",
-          "status": "non_lu"
-        },
-        {
-          "id_notif": 2,
-          "message": "Votre congé maladie du 10/02/2025 a été approuvé.",
-          "status": "lu"
-        }
-      ]
+      "type_conge": "Congés payés",
+      "status_conge": "approuvé",
+      "justification": "aukdfkserf",
+      "date_debut": "2025-05-12",
+      "date_fin": "2025-05-15",
+      "duree": 4,
+      "date_demande": "2025-04-20"
     },
     {
+      "id": "4",
+      "id_employee": 1,
+      "type_conge": "Congés maladie",
+      "status_conge": "approuvé",
+      "justification": "ijilsdjwqsdje",
+      "date_debut": "2025-09-12",
+      "date_fin": "2025-09-21",
+      "duree": 10
+    },
+    {
+      "id": "5",
       "id_employee": 2,
-      "nom_employee": "Meliva",
-      "prenom_employee": "maric",
-      "conges": [
-        {
-          "id_conge": 6,
-          "type_conge": "Congé maladie",
-          "status_conge": "approuvé",
-          "justification": "Hospitalisation",
-          "date_debut": "2025-02-01",
-          "date_fin": "2025-02-05",
-          "duree": 5
-        },
-        {
-          "id_conge": 7,
-          "type_conge": "Congé payé",
-          "status_conge": "refusé",
-          "justification": "Raisons personnelles",
-          "date_debut": "2025-03-15",
-          "date_fin": "2025-03-16",
-          "duree": 2
-        },
-        {
-          "id_conge": 8,
-          "type_conge": "Sans solde",
-          "status_conge": "en attente",
-          "justification": "Voyage urgent",
-          "date_debut": "2025-04-01",
-          "date_fin": "2025-04-03",
-          "duree": 3
-        },
-        {
-          "id_conge": 9,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Naissance",
-          "date_debut": "2025-05-10",
-          "date_fin": "2025-05-14",
-          "duree": 5
-        },
-        {
-          "id_conge": 10,
-          "type_conge": "Congé payé",
-          "status_conge": "en attente",
-          "justification": "Voyage",
-          "date_debut": "2025-06-20",
-          "date_fin": "2025-06-22",
-          "duree": 3
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 3,
-          "message": "Votre congé maladie du 01/02/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 4,
-          "message": "Votre demande de congé du 15/03/2025 a été refusée.",
-          "status": "non_lu"
-        }
-      ]
+      "type_conge": "Congés maladie",
+      "status_conge": "refusé",
+      "justification": "jjdjsfe",
+      "date_debut": "2025-09-19",
+      "date_fin": "2025-09-14",
+      "duree": 4
     },
     {
-      "id_employee": 3,
-      "nom_employee": "John",
-      "prenom_employee": "mandes",
-      "conges": [
-        {
-          "id_conge": 11,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Voyage",
-          "date_debut": "2025-07-05",
-          "date_fin": "2025-07-12",
-          "duree": 8
-        },
-        {
-          "id_conge": 12,
-          "type_conge": "Congé maladie",
-          "status_conge": "en attente",
-          "justification": "Consultation médicale",
-          "date_debut": "2025-08-01",
-          "date_fin": "2025-08-02",
-          "duree": 2
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 5,
-          "message": "Votre congé payé du 05/07/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 6,
-          "message": "Votre congé maladie du 01/08/2025 est en attente.",
-          "status": "non_lu"
-        }
-      ]
-    },
-    {
+      "id": "8",
       "id_employee": 2,
-      "nom_employee": "arthur",
-      "prenom_employee": "lipa",
-      "conges": [
-        {
-          "id_conge": 13,
-          "type_conge": "Congé maladie",
-          "status_conge": "approuvé",
-          "justification": "Hospitalisation",
-          "date_debut": "2025-02-01",
-          "date_fin": "2025-02-05",
-          "duree": 5
-        },
-        {
-          "id_conge": 14,
-          "type_conge": "Congé payé",
-          "status_conge": "refusé",
-          "justification": "Raisons personnelles",
-          "date_debut": "2025-03-15",
-          "date_fin": "2025-03-16",
-          "duree": 2
-        },
-        {
-          "id_conge": 15,
-          "type_conge": "Sans solde",
-          "status_conge": "en attente",
-          "justification": "Voyage urgent",
-          "date_debut": "2025-04-01",
-          "date_fin": "2025-04-03",
-          "duree": 3
-        },
-        {
-          "id_conge": 16,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Naissance",
-          "date_debut": "2025-05-10",
-          "date_fin": "2025-05-14",
-          "duree": 5
-        },
-        {
-          "id_conge": 17,
-          "type_conge": "Congé payé",
-          "status_conge": "en attente",
-          "justification": "Voyage",
-          "date_debut": "2025-06-20",
-          "date_fin": "2025-06-22",
-          "duree": 3
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 7,
-          "message": "Votre congé maladie du 01/02/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 8,
-          "message": "Votre demande de congé du 15/03/2025 a été refusée.",
-          "status": "non_lu"
-        }
-      ]
+      "type_conge": "RTT",
+      "status_conge": "approuvé",
+      "justification": "njnkjnkjknd",
+      "date_debut": "2025-09-13",
+      "date_fin": "2025-09-18",
+      "duree": 6
     },
     {
+      "id": "10",
       "id_employee": 3,
-      "nom_employee": "Ketty",
-      "prenom_employee": "show",
-      "conges": [
-        {
-          "id_conge": 18,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Voyage",
-          "date_debut": "2025-07-05",
-          "date_fin": "2025-07-12",
-          "duree": 8
-        },
-        {
-          "id_conge": 19,
-          "type_conge": "Congé maladie",
-          "status_conge": "en attente",
-          "justification": "Consultation médicale",
-          "date_debut": "2025-08-01",
-          "date_fin": "2025-08-02",
-          "duree": 2
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 9,
-          "message": "Votre congé payé du 05/07/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 10,
-          "message": "Votre congé maladie du 01/08/2025 est en attente.",
-          "status": "non_lu"
-        }
-      ]
+      "type_conge": "Congés payés",
+      "status_conge": "approuvé",
+      "justification": "BJJHHJH",
+      "date_debut": "2025-09-13",
+      "date_fin": "2025-09-21",
+      "duree": 9
     },
     {
+      "id": "2",
       "id_employee": 3,
-      "nom_employee": "marron",
-      "prenom_employee": "adif",
-      "conges": [
-        {
-          "id_conge": 20,
-          "type_conge": "Congé maladie",
-          "status_conge": "approuvé",
-          "justification": "Hospitalisation",
-          "date_debut": "2025-02-01",
-          "date_fin": "2025-02-05",
-          "duree": 5
-        },
-        {
-          "id_conge": 21,
-          "type_conge": "Congé payé",
-          "status_conge": "refusé",
-          "justification": "Raisons personnelles",
-          "date_debut": "2025-03-15",
-          "date_fin": "2025-03-16",
-          "duree": 2
-        },
-        {
-          "id_conge": 22,
-          "type_conge": "Sans solde",
-          "status_conge": "en attente",
-          "justification": "Voyage urgent",
-          "date_debut": "2025-04-01",
-          "date_fin": "2025-04-03",
-          "duree": 3
-        },
-        {
-          "id_conge": 23,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Naissance",
-          "date_debut": "2025-05-10",
-          "date_fin": "2025-05-14",
-          "duree": 5
-        },
-        {
-          "id_conge": 24,
-          "type_conge": "Congé payé",
-          "status_conge": "en attente",
-          "justification": "Voyage",
-          "date_debut": "2025-06-20",
-          "date_fin": "2025-06-22",
-          "duree": 3
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 11,
-          "message": "Votre congé maladie du 01/02/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 12,
-          "message": "Votre demande de congé du 15/03/2025 a été refusée.",
-          "status": "non_lu"
-        }
-      ]
+      "type_conge": "Congés maladie",
+      "status_conge": "approuvé",
+      "justification": "BJHHDSH",
+      "date_debut": "2025-09-26",
+      "date_fin": "2025-10-03",
+      "duree": 8
     },
     {
-      "id_employee": 4,
-      "nom_employee": "sami",
-      "prenom_employee": "RAFIN",
-      "conges": [
-        {
-          "id_conge": 25,
-          "type_conge": "Congé payé",
-          "status_conge": "approuvé",
-          "justification": "Voyage",
-          "date_debut": "2025-07-05",
-          "date_fin": "2025-07-12",
-          "duree": 8
-        },
-        {
-          "id_conge": 26,
-          "type_conge": "Congé maladie",
-          "status_conge": "en attente",
-          "justification": "Consultation médicale",
-          "date_debut": "2025-08-01",
-          "date_fin": "2025-08-02",
-          "duree": 2
-        }
-      ],
-      "notifications": [
-        {
-          "id_notif": 13,
-          "message": "Votre congé payé du 05/07/2025 a été approuvé.",
-          "status": "lu"
-        },
-        {
-          "id_notif": 14,
-          "message": "Votre congé maladie du 01/08/2025 est en attente.",
-          "status": "non_lu"
-        }
-      ]
+      "id": "11",
+      "id_employee": 3,
+      "type_conge": "RTT",
+      "status_conge": "approuvé",
+      "justification": "KIDJIZIJDJEZJICF",
+      "date_debut": "2025-09-13",
+      "date_fin": "2025-09-17",
+      "duree": 5
+    },
+    {
+      "id": "16",
+      "id_employee": 3,
+      "type_conge": "Congés maladie",
+      "status_conge": "approuvé",
+      "justification": "rjzesvjikerjig",
+      "date_debut": "2025-09-13",
+      "date_fin": "2025-09-14",
+      "duree": 2
+    },
+    {
+      "id": "7",
+      "id_employee": 1,
+      "type_conge": "Congés maladie",
+      "status_conge": "en attente",
+      "justification": "uhaed",
+      "date_debut": "2025-09-16",
+      "date_fin": "2025-09-20",
+      "duree": 5
+    },
+    {
+      "id": "13",
+      "id_employee": 1,
+      "type_conge": "Autre",
+      "status_conge": "approuvé",
+      "justification": "jldcwsdujhkcfdwscfwsdjhf",
+      "date_debut": "2025-09-14",
+      "date_fin": "2025-09-17",
+      "duree": 4
+    },
+    {
+      "id": "Math.floor((Math.random()*20)+1)",
+      "id_employee": 1,
+      "type_conge": "RTT",
+      "status_conge": "en attente",
+      "justification": "DJNKCJKQCFJKDQS",
+      "date_debut": "2025-09-13",
+      "date_fin": "2025-09-16",
+      "duree": 4
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "id_employee": 1,
+      "message": "Votre demande de congé du 22/01/2025 est en attente.",
+      "date": "2025-01-15T10:30:00Z"
+    },
+    {
+      "id": "3",
+      "id_employee": 1,
+      "message": "Votre demande de congé du 22/01/2025 est en attente.",
+      "date": "2025-01-15T10:30:00Z"
+    },
+    {
+      "id": "4",
+      "id_employee": 2,
+      "message": "Votre demande de congé du 22/01/2025 est en attente.",
+      "date": "2025-01-15T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "id_employee": 2,
+      "message": "Votre congé maladie du 10/02/2025 a été approuvé.",
+      "date": "2025-02-05T14:15:00Z"
     }
   ]
 }

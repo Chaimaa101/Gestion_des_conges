@@ -9,10 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>Administration</title>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
-  <main class="mainContent flex-1 ml-64 md:ml-64 p-4 md:p-6 transition-all duration-500 ease-in-out">
+  <main class="mainContent ml-64 p-4 transition-all duration-500 ease-in-out">
     
     <h2 class="text-xl md:text-2xl font-bold text-black mb-4 md:mb-6 animate-fadeIn">
       Gestion des congés
@@ -23,22 +24,22 @@
       <div class="card bg-orange-200 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
         <i class="fas fa-calendar-check text-orange-500 text-lg md:text-xl mb-1 md:mb-2"></i>
         <p class="text-xs md:text-sm text-gray-500">Congés restants</p>
-        <p class="text-lg md:text-2xl font-bold">28 jours</p>
+        <p class="text-lg md:text-2xl font-bold"></p>
       </div>
       <div class="card bg-green-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
         <i class="fas fa-check-circle text-green-800 text-lg md:text-xl mb-1 md:mb-2"></i>
         <p class="text-xs md:text-sm text-green-800">Approuvés</p>
-        <p class="text-lg md:text-2xl font-bold">5 jours</p>
+        <p class=" accepted text-lg md:text-2xl font-bold"> </p>
       </div>
       <div class="card bg-yellow-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
         <i class="fas fa-clock text-yellow-800 text-lg md:text-xl mb-1 md:mb-2"></i>
         <p class="text-xs md:text-sm text-yellow-800">En attente</p>
-        <p class="text-lg md:text-2xl font-bold">23 jours</p>
+        <p class="pending text-lg md:text-2xl font-bold"> </p>
       </div>
       <div class="card bg-red-100 p-3 md:p-4 rounded-lg shadow hover:scale-105 transform transition duration-300">
         <i class="fas fa-times-circle text-red-800 text-lg md:text-xl mb-1 md:mb-2"></i>
         <p class="text-xs md:text-sm text-red-800">Refusés</p>
-        <p class="text-lg md:text-2xl font-bold">0 jour</p>
+        <p class="refused text-lg md:text-2xl font-bold"> </p>
       </div>
     </div>
 
@@ -48,40 +49,125 @@
         <h3 class="text-md md:text-lg font-semibold">Demandes de congés</h3>
       
         <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
-          <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
-            <option selected disabled>Choisir statut</option>
-            <option value="en-attente">En attente</option>
-            <option value="approuvé">Approuvé</option>
-            <option value="refusé">Refusé</option>
-          </select>
           
-          <select class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
-            <option selected disabled>Choisir période</option>
-            <option value="ce-mois">Ce mois</option>
-            <option value="3-mois">3 derniers mois</option>
-            <option value="année">Cette année</option>
+          <select id="filterEmployee" class="border border-gray-300 rounded-md p-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition">
+           
           </select>
         </div>
       </div>
+  
+                    <div class="flex space-x-2 border-b border-gray-200 mb-4">
+  <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent tab-active" data-tab="all"> 
+    Tous
+  </button>
+  <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition" data-tab="pending">
+    En attente
+  </button>
+  <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition" data-tab="approved">
+    Approuvés
+  </button>
+  <button class="tab-button px-4 py-2 text-sm font-medium text-gray-600 hover:text-orange-600 hover:border-orange-500 border-b-2 border-transparent transition" data-tab="refused">
+    Refusés
+  </button>
+</div>
+
 
       <div id="leaves" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mt-4">
     <!-------- All cards here-->
                 
       </div>
 
-      <div class="flex justify-end items-center space-x-3 mt-6">
-        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">
-          Previous
-        </button>
-        <span class="text-gray-500 font-bold">1/5</span>
-        <button class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-300">
-          Next
-        </button>
-      </div>
+     
     </section>
+     <div class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0">
+            <div class="text-sm text-gray-500">
+                Affichage de 1 à 3 sur 10 demandes
+            </div>
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center">
+                    <i class="fas fa-chevron-left mr-2 text-xs"></i> Précédent
+                </button>
+                <div class="flex space-x-1">
+                    <button class="w-8 h-8 bg-orange-500 text-white rounded-lg">1</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">2</button>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">3</button>
+                    <span class="px-2 py-2">...</span>
+                    <button class="w-8 h-8 bg-white text-gray-700 rounded-lg hover:bg-gray-100">5</button>
+                </div>
+                <button class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors flex items-center">
+                    Suivant <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+
   </main>
+<script src="../Script/script.js"></script>
 
+<script>
+ 
+  const select = document.getElementById("filterEmployee");
+  async function loadEmployees() {
+    try {
+      const res = await axios.get("http://localhost:4000/employees");
+      const data = res.data;
 
-  <script src="../Script/script.js"></script>
+      const allOption = document.createElement("option");
+      allOption.value = "all";
+      allOption.textContent = "Tous les employés";
+      select.appendChild(allOption);
+
+      data.forEach(emp => {
+        const option = document.createElement("option");
+        option.value = emp.id;
+        option.textContent = `${emp.nom} ${emp.prenom}`;
+        select.appendChild(option);
+      });
+
+    } catch (err) {
+      console.error("Erreur chargement employés :", err);
+    }
+  }
+
+  loadEmployees();
+  
+  // Filtrage employé
+  select.addEventListener("change", (e) => {
+    const empId = e.target.value;
+
+    document.querySelectorAll(".leave-card").forEach(card => {
+      const cardEmpId = card.getAttribute("data-employee-id");
+      card.style.display = (empId === "all" || cardEmpId === empId) ? "" : "none";
+    });
+  });
+
+  // Filtrage par statut
+  document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', function () {
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('tab-active');
+      });
+      this.classList.add('tab-active');
+
+      const tab = this.getAttribute('data-tab');
+      const cards = document.querySelectorAll('#leaves > .leave-card');
+
+      cards.forEach(card => {
+        const status = card.querySelector('.status-badge').textContent.trim().toLowerCase();
+        if (tab === 'all') {
+          card.style.display = '';
+        } else if (tab === 'pending') {
+          card.style.display = status.includes('en attente') ? '' : 'none';
+        } else if (tab === 'approved') {
+          card.style.display = status.includes('approuvé') ? '' : 'none';
+        } else if (tab === 'refused') {
+          card.style.display = status.includes('refusé') ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
